@@ -1,37 +1,83 @@
 //Create new button
-function draw_button(input_text, positon_top, position_left, function_to_execute , button_class) {
+function draw_button(input_text, positon_top, position_left, function_to_execute , section_identifier) {
     let new_button = document.createElement("button");
+    let section = check_section(section_identifier);
     new_button.innerHTML = input_text;
-    new_button.classList.add("btn" , button_class);    
-    if (window.innerWidth > 1000) {
-    }
-    position_left = ((window.innerWidth-1000) / 2) + (1000*(position_left/100)) - 100
-    positon_top = "" + (600 * (positon_top/100) )+ "px"
-    position_left = "" + position_left + "px"
-    
-    new_button.style.top = positon_top;
-    new_button.style.left = position_left;
-    
-    canvas.parentNode.insertBefore(new_button, canvas.nextSibling);
+    new_button.className = "btn";    
+    section.appendChild(draw_element_position(new_button, positon_top, position_left));
     new_button.addEventListener("click" , function_to_execute);
 }
 
-function remove_buttons() {
-    var buttons = document.getElementsByClassName("btn");
-    for (let index = 0; index < buttons.length; index++) {
-        buttons[index].style.display = "none";
-        console.log(buttons[index].innerHTML)
+function background_animation() {
+    y_pos += 0.5;
+    if (y_pos > canvas.height) {
+        y_pos = 0;
     }
+    ctx.drawImage(backgroundImage, 0, y_pos - canvas.height, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, 0, y_pos, canvas.width, canvas.height);
+    requestAnimationFrame(background_animation);
 }
 
-function check_for_existing_elements(class_name){
-    var existing_buttons = document.getElementsByClassName(class_name);
-    if (existing_buttons.length > 0) {
-        for (let index = 0; index < array.length; index++) {
-            existing_buttons[index].style.display = "block";
-        }
-        return true
-    }
-    return false
+function draw_image(positon_top, position_left , section_id , image_path , image_identifier){
+    let section = check_section(section_id);
+    let image = document.createElement("img");
+    image.src = image_path;
+    image.id = image_identifier;
+    section.appendChild(draw_element_position(image, positon_top, position_left));
 }
-exports = { draw_button , remove_buttons , check_for_existing_elements}
+
+function draw_image_button(positon_top, position_left , section_id , image_path , image_identifier , button_function){
+    var section = check_section(section_id);
+    var button_container = document.createElement("button");
+    button_container.id = "button_container";
+    button_container.addEventListener("click" , button_function);
+    var image = document.createElement("img");
+    button_container.appendChild(image);
+    image.src = image_path;
+    image.id = image_identifier;
+    section.appendChild(draw_element_position(button_container, positon_top, position_left))
+}
+
+function draw_input_button(positon_top, position_left , section_id , input_class){
+    var section = document.getElementById(section_id);
+    var input_button = document.createElement("input");
+    input_button.className = input_class;
+    input_button.addEventListener("click" , function(){
+        input_button.focus();
+    });
+    input_button.addEventListener("keydown", function(event) {
+        console.log("Key pressed:", event.key);
+        input_button.value = (event.key).toUpperCase();
+        input_button.blur();
+      });
+    section.appendChild(draw_element_position(input_button, positon_top, position_left));
+
+}
+
+function draw_volume_slider(positon_top, position_left, section_id, input_identifier){
+    var section = check_section(section_id);
+    var input_button = document.createElement("input");
+    input_button.type = "range";
+    input_button.id = input_identifier;
+    section.appendChild(draw_element_position(input_button, positon_top, position_left));
+}
+
+function draw_input_skin_button(positon_top, position_left, section_id, button_identifier){ 
+    var section = check_section(section_id);
+    var skin_button = document.createElement("button");
+    skin_button.id = button_identifier;
+    skin_button.className = "skin_button";
+
+    //additional functions
+    section.appendChild(draw_element_position(skin_button, positon_top, position_left));
+}
+
+function draw_reward_buttons(positon_top, position_left, section_id){
+    var section = check_section(section_id);
+    var skin_button = document.createElement("button");
+    skin_button.className = "reward_button";
+
+
+    section.appendChild(draw_element_position(skin_button, positon_top, position_left));
+}
+exports = { draw_button , background_animation , draw_image , draw_input_button}

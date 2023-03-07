@@ -23,3 +23,40 @@ body{
 .btn:hover{
     background-size: 250px 150px;
 }
+#volume:hover{
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+}
+#button_container{
+    background-color: transparent;
+    border: none;
+}
+.input_key{
+    width: 5vw;
+    height: 6vh;
+    color: black;
+    background-image: url("/static/images/button_background.jpg");
+    background-size: 200px 100px;
+    border: 2px solid #202020;
+    line-height: 6vh;
+    font-size: 40px;
+    text-align: center;
+}
+.input_key:hover{
+    background-size: 250px 150px;
+}
+.skin_button{
+    width: 10vw;
+    height: 12vh;
+    border: 2px solid #202020;
+    transition: all 0.5s ease;
+}
+.skin_button:hover{
+    transform: scale(1.1);
+}
+.reward_button{
+    width: 50vw;
+    height: 5vh;
+    border: 2px solid #202020;
+    border-radius: 3px;
+}
