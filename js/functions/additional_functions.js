@@ -53,4 +53,4 @@ function draw_element_position(object, positon_top, position_left){
     return object;
 }
 
-exports = { remove_buttons, check_for_existing_elements, calculate_canvas_position, switch_mute_image}
+exports = { remove_buttons, check_for_existing_elements, calculate_canvas_position, switch_mute_image , check_section }

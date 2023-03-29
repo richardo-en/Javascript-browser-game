@@ -1,0 +1,11 @@
+{
+    "task_1" : [
+    {"task" : "sprav nieco neviem co",
+    "is_active" : true}
+    ],
+    "task_2" : [
+        {"task" :"sprav nieco druhe neviem co",
+        "is_active" : false
+    }
+    ]
+}
