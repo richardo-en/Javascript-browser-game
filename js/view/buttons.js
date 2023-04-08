@@ -76,7 +76,7 @@ class Button extends Button_parent{
         });
         input_button.addEventListener("keydown", function(event) {
             input_button.value = (event.key).toUpperCase();
-            set_setting_values();
+            // set_setting_values();
             input_button.blur();
         });
         //

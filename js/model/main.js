@@ -19,16 +19,15 @@ function draw_image(positon_top, position_left , section_identifier , image_path
     section.appendChild(this.draw_element_position(image, positon_top, position_left));
 }
 
-new Section().create_skins();
-new Section().create_rewards();
-new Section().create_setting();
-new Section().create_main_page();
 
 var movingImage = new Canvas_background(0.5 , "/static/images/infinite_road.png");
 movingImage.startLoop();
 
-function get_background_object(){
-    return movingImage;
+
+function get_object(type){
+    if (type == "background") {
+        return movingImage;
+    }
 }
 
 document.addEventListener('keydown', (event) => {
@@ -39,4 +38,9 @@ document.addEventListener('keydown', (event) => {
     }else if (event.key === "p"){
         draw_game_screen("break");
     }
-  }, false);
+}, false);
+
+new Section().create_skins();
+new Section().create_rewards();
+new Section().create_setting();
+new Section().create_main_page();

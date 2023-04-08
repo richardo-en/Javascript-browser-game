@@ -1,3 +1,5 @@
+var canvas = document.getElementById("main_canvas");
+var ctx = canvas.getContext("2d");
 class Section {
     constructor() {
     }
@@ -13,19 +15,20 @@ class Section {
             new Button(55, 80, identifier, this.test).draw_input_skin_button("skin_4");
         };
     }
-
+    
     create_main_page() {
         let identifier = "main_menu_view";
         let look_for_buttons = check_for_existing_elements(identifier);
         if (look_for_buttons == false) {
-            new Button(50, 30, identifier, start_game).draw_button('Hrať');
-            new Button(70, 30, identifier, this.create_skins).draw_button('Skiny');
-            new Button(70, 70, identifier, this.create_rewards).draw_button('Odmeny');
-            new Button(50, 70, identifier, this.create_setting).draw_button('Nastavenia');
+            new Button(40, 30, identifier, start_game).draw_button('Hrať');
+            new Button(60, 30, identifier, this.create_skins).draw_button('Skiny');
+            new Button(60, 70, identifier, this.create_rewards).draw_button('Odmeny');
+            new Button(40, 70, identifier, this.create_setting).draw_button('Nastavenia');
             new Button(20, 38.5, identifier).draw_image("/static/images/game_logo.png");
+            new Button(80, 50, identifier, draw_help_screen).draw_button('Help');
         };
     }
-
+    
     create_rewards() {
         let identifier = "rewards_view";
         let look_for_buttons = check_for_existing_elements(identifier);
@@ -36,7 +39,7 @@ class Section {
             new Button(60, 30, identifier, this.test).draw_reward_buttons();
         };
     }
-
+    
     create_setting() {
         let identifier = "settings_view";
         let look_for_buttons = check_for_existing_elements(identifier);
@@ -52,7 +55,7 @@ class Section {
             load_setting_vlues();
         };
     }
-
+    
     test() {
         alert("Test");
     }
