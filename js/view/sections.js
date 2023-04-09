@@ -51,7 +51,7 @@ class Section {
             new Button(5, 103, identifier, switch_mute_image).draw_volume("/static/images/volume_on.svg", "volume");
             new Button(10, 60, identifier, this.test).draw_input_button("movement_left");
             new Button(30, 60, identifier, this.test).draw_input_button("movement_right");
-            new Button(50, 50, identifier, this.test).draw_volume_slider("volume_bar");
+            new Button(50, 50, identifier, set_volume).draw_volume_slider("volume_bar");
             load_setting_vlues();
         };
     }

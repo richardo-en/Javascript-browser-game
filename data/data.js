@@ -1,11 +1,18 @@
 
 function load_setting_vlues(){
+    let mute_button = document.getElementById("button_container");
+    let audio = document.getElementById("volume_bar")
     fetch('/data/settings.json')
         .then(response => response.json())
         .then(data => {
             document.getElementById("movement_left").value = data.button_left.toUpperCase();
             document.getElementById("movement_right").value = data.button_right.toUpperCase();
-            document.getElementById("volume_bar").value = data.volume;
+            audio.value = data.volume;
+            if (data.volume == 0 && mute_button.className == "on") {
+                switch_mute_image()
+                audio.currentTime = 0;
+            }
+            document.getElementById("my_audio").volume = data.volume/100;
         })
 }
 

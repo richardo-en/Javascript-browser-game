@@ -1,5 +1,5 @@
-// var backgroundImage = new Image();
-// backgroundImage.src = "/static/images/infinite_road.png";
+var canvas = document.getElementById("main_canvas");
+var ctx = canvas.getContext("2d");
 
 class Canvas_background {
     constructor(speed, img) {
@@ -14,8 +14,6 @@ class Canvas_background {
 
         this.animationID = null;
         this.image.onload = this.loop;
-        this.canvas = document.getElementById("main_canvas");
-        this.ctx = this.canvas.getContext("2d");
     }
     
     changeSpeed(newSpeed) {
@@ -24,11 +22,11 @@ class Canvas_background {
     
     loop() {
         this.y_pos += this.speed;
-        if (this.y_pos > this.canvas.height) {
+        if (this.y_pos > canvas.height) {
             this.y_pos = this.speed;
         }
-        this.ctx.drawImage(this.backgroundImage, 0, this.y_pos - this.canvas.height, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.backgroundImage, 0, this.y_pos, this.canvas.width, this.canvas.height);
+        ctx.drawImage(this.backgroundImage, 0, this.y_pos - canvas.height, canvas.width, canvas.height);
+        ctx.drawImage(this.backgroundImage, 0, this.y_pos, canvas.width, canvas.height);
         this.animationID = requestAnimationFrame(this.loop.bind(this));
     }
     
