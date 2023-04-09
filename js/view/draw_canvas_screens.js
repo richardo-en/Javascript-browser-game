@@ -132,6 +132,7 @@ class Canvas_screens extends Canvas_parent {
     }
 
     help_screen(){
+        canvas.className = "help_screen";
         let x_position = 100;
         let y_position = 100;
         let image_list = [new Image(), new Image(), new Image(), new Image()];
@@ -145,7 +146,7 @@ class Canvas_screens extends Canvas_parent {
             this.clear_screen()
             this.ctx.beginPath();
             this.ctx.roundRect(20, 20, canvas.width - 40, canvas.height - 40 , [25]);
-            this.ctx.fillStyle = "#9A543B";
+            this.ctx.fillStyle = "#596a85";
             this.ctx.fill();
             this.draw_button_with_custom_positions("Back to main menu", (canvas.width/2) - 120, canvas.height - 100, 240, 45);
             for (let i = 0; i < 2; i++) {

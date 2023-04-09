@@ -88,6 +88,7 @@ class Button extends Button_parent{
         var input_button = document.createElement("input");
         input_button.type = "range";
         input_button.id = input_identifier;
+        input_button.addEventListener("input", this.function_to_execute)
         section.appendChild(this.set_element_position(input_button, this.positon_top, this.position_left));
     }
     

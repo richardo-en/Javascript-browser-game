@@ -1,3 +1,31 @@
+var audio = document.getElementById("my_audio");
+audio.play();
+
+function set_volume(){
+    let mute_button = document.getElementById("button_container");
+    let new_volume_value = document.getElementById("volume_bar").value / 100;
+    if (new_volume_value == 0 && audio.volume != 0) {
+        audio.pause();
+        audio.currentTime = 0;
+        if (mute_button.className == "on") {
+            switch_mute_image();
+        }
+    }else if(audio.volume == 0 && new_volume_value > 0){
+        audio.currentTime = 0;
+        audio.play();
+        if (mute_button.className == "off") {
+            switch_mute_image();
+        }
+    }
+    audio.volume  = new_volume_value;
+}
+
+audio.addEventListener("ended", function() {
+    audio.currentTime = 0;
+    audio.play();
+});
+  
+
 function save_settings_button(){
         set_setting_values();
         new Section().create_main_page();
@@ -21,24 +49,29 @@ function remove_all_elements() {
     });
 };
 
+
+//Settings
 function switch_mute_image() {
     let button_image = document.getElementById("volume");
-    let background_music = document.getElementById("main_music");
-    if (!background_music) {
-        background_music = document.createElement("src");
-        background_music.id = "main_music";
-        //background_music.src = ;
-    }
     let mute_button = document.getElementById("button_container");
+    let new_volume_value = document.getElementById("volume_bar");
     if (mute_button.className == "on") {
-        background_music.pause();
-        background_music.currentTime = 0;
         button_image.src = "/static/images/volume_off.svg";
         mute_button.className = "off"
+        audio.volume = 0;
+        new_volume_value.value = 0;
+        audio.pause();
+        audio.currentTime = 0;
+
     } else {
-        background_music.play();
         button_image.src = "/static/images/volume_on.svg";
         mute_button.className = "on"
+        if (new_volume_value.value == 0) {
+            new_volume_value.value = 50;
+        }
+        audio.volume = 0.5;
+        audio.currentTime = 0;
+        audio.play();
     }
 };
 
