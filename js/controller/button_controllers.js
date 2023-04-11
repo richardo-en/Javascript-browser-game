@@ -6,7 +6,7 @@ function set_volume(){
     let new_volume_value = document.getElementById("volume_bar").value / 100;
     if (new_volume_value == 0 && audio.volume != 0) {
         // audio.pause();
-        audio.currentTime = 0;
+        // audio.currentTime = 0;
         if (mute_button.className == "on") {
             switch_mute_image();
         }
