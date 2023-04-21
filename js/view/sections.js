@@ -46,13 +46,13 @@ class Section {
         if (look_for_buttons == false) {
             new Button(10, 15, identifier, this.test).draw_image("/static/images/movement_left_settings.png");
             new Button(30, 15, identifier, this.test).draw_image("/static/images/movement_right_settings.png");
-            new Button(50, 15, identifier, this.test).draw_image("/static/images/volume_settings.png");
-            new Button(80, 51, identifier, this.create_main_page).draw_button("Späť");
+            new Button(50, 15, identifier, switch_mute_image).draw_image("/static/images/volume_settings.png");
+            new Button(80, 51, identifier, save_settings_button).draw_button("Späť");
             new Button(5, 103, identifier, switch_mute_image).draw_volume("/static/images/volume_on.svg", "volume");
             new Button(10, 60, identifier, this.test).draw_input_button("movement_left");
             new Button(30, 60, identifier, this.test).draw_input_button("movement_right");
             new Button(50, 50, identifier, set_volume).draw_volume_slider("volume_bar");
-            load_setting_vlues();
+            // load_setting_vlues();
         };
     }
     

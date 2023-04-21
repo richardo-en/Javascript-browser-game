@@ -1,7 +1,7 @@
 var audio = document.getElementById("my_audio");
-audio.play();
-
-function set_volume(){
+audio.pause();
+var player;
+function set_volume() {
     let mute_button = document.getElementById("button_container");
     let new_volume_value = document.getElementById("volume_bar").value / 100;
     if (new_volume_value == 0 && audio.volume != 0) {
@@ -10,28 +10,27 @@ function set_volume(){
         if (mute_button.className == "on") {
             switch_mute_image();
         }
-    }else if(audio.volume == 0 && new_volume_value > 0){
+    } else if (audio.volume == 0 && new_volume_value > 0) {
         audio.currentTime = 0;
         audio.play();
         if (mute_button.className == "off") {
             switch_mute_image();
         }
     }
-    audio.volume  = new_volume_value;
+    audio.volume = new_volume_value;
 }
 
-audio.addEventListener("ended", function() {
+audio.addEventListener("ended", function () {
     audio.currentTime = 0;
     audio.play();
 });
-  
 
-function save_settings_button(){
-        set_setting_values();
-        new Section().create_main_page();
-};
 
-function draw_help_screen(){
+function save_settings_button() {
+    // set_settings_values();
+    new Section().create_main_page();
+}
+function draw_help_screen() {
     let background = get_object("background")
     remove_all_elements();
     background.stopLoop();
@@ -47,7 +46,7 @@ function remove_all_elements() {
             element.style.display = 'none';
         });
     });
-};
+}; 
 
 
 //Settings
@@ -90,4 +89,28 @@ function check_for_existing_elements(identifier) {
 
 function start_game() {
     remove_all_elements();
+    // player = new Player("/static/images/cars/police/german_police_car.png");
+    // let car = new Cars(5, 0, -300 , 100, 200, "/static/images/cars/police/german_police_car.png");
+    // car.move_back_right();
+    new Levels().easy_algorythm_3();
 };
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "d") {
+        player.start_move_right();
+    }
+    else if (event.key === "a") {
+        player.start_move_left();
+    }
+});
+
+document.addEventListener("keyup", (event) => {
+    if (event.key === "d") {
+        player.stop_move_right();
+        player.reset_rotation();
+    }
+    else if (event.key === "a") {
+        player.stop_move_left();
+        player.reset_rotation();
+    }
+});

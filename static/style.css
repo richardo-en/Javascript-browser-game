@@ -1,4 +1,4 @@
-body{
+ body{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,4 +9,24 @@ body{
 #button_container{
     background-color: transparent;
     border: none;
-}
+} 
+
+#background_image {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    padding: 0;
+    width: 1000px;
+    height: 600px;
+    background: url('/static/images/infinite_road.png') repeat-y;
+    animation: moveBackground 5s linear infinite;
+  }
+  
+  @keyframes moveBackground {
+    from {
+      background-position-y: 0;
+    }
+    to {
+      background-position-y: 600px;
+    }
+  }

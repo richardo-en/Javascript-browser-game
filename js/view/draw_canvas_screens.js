@@ -165,9 +165,7 @@ class Canvas_screens extends Canvas_parent {
 }
 
 function draw_game_screen(screen_type){
-    let background = get_object("background")
     remove_all_elements();
-    background.stopLoop();
     if (screen_type == "lose") {
         screen = new Canvas_screens();
         screen.losing_screen();

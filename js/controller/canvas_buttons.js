@@ -4,9 +4,7 @@ var canvas_screen = null;
 var positions = null;
 
 function return_to_main_menu(){
-    let background_object = get_object("background");
     new Canvas_screens().clear_screen();
-    background_object.startLoop();
     new Section().create_main_page();
     canvas.className = "not_touchable"
 }

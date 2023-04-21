@@ -1,7 +1,7 @@
 
-function load_setting_vlues(){
+function load_setting_vlues() {
     let mute_button = document.getElementById("button_container");
-    let audio = document.getElementById("volume_bar")
+    let audio = document.getElementById("volume_bar");
     fetch('/data/settings.json')
         .then(response => response.json())
         .then(data => {
@@ -12,45 +12,36 @@ function load_setting_vlues(){
                 switch_mute_image()
                 audio.currentTime = 0;
             }
-            document.getElementById("my_audio").volume = data.volume/100;
+            document.getElementById("my_audio").volume = data.volume / 100;
         })
 }
 
-// function set_setting_values() {
-    // fetch('/data/settings.json')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         data.button_left = document.getElementById("movement_left").value;
-    //         data.button_right = document.getElementById("movement_right").value;
-    //         data.volume = document.getElementById("volume_bar").value;
+function set_settings_values() {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            
+            // modify the data as needed
+            let audio = document.getElementById("volume_bar");
+            let movement_left = document.getElementById("movement_left").value.toUpperCase();
+            let movement_right = document.getElementById("movement_right").value.toUpperCase();
+            let volume = audio.volume;
+            let newData = Object.entries(data).map(([key, value]) => ({ [key]: value }));
+            newData.push({ button_left: movement_left, button_right: movement_right, volume: volume });
 
-    //         console.log(fetch('/data/settings.json', {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(data)
-    //         }))
-    // });
-
-    // var xhttp = new XMLHttpRequest();
-
-    // xhttp.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         console.log(this.responseText);
-    //     }
-    // };
-    // xhttp.open("GET", "data/test.php?data=" + JSON.stringify(data), true)
-    // xhttp.open("POST", "/data/test.php", true);
-    // // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    // var data = {
-    //     button_left: document.getElementById("movement_left").value.toUpperCase(),
-    //     button_right: document.getElementById("movement_right").value.toUpperCase(),
-    //     volume: document.getElementById("volume_bar").value
-    // };
-
-    // xhttp.send("data=" + JSON.stringify(data));
-// }
-
-// console.log(load_setting_vlues());
+            // write the modified data back to the file using AJAX
+            const xhr2 = new XMLHttpRequest();
+            xhr2.onreadystatechange = function () {
+                if (xhr2.readyState === 4 && xhr2.status === 200) {
+                    console.log("Data saved successfully");
+                }
+            };
+            xhr2.open("POST", "data/save.php"); // replace "save.php" with the URL of your server-side script that handles saving the data
+            xhr2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr2.send(JSON.stringify(newData));
+        }
+    };
+    xhr.open("GET", "data/settings.json"); // replace "data.json" with the name of your JSON file
+    xhr.send();
+}

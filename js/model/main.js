@@ -19,17 +19,6 @@ function draw_image(positon_top, position_left , section_identifier , image_path
     section.appendChild(this.draw_element_position(image, positon_top, position_left));
 }
 
-
-var movingImage = new Canvas_background(0.5 , "/static/images/infinite_road.png");
-movingImage.startLoop();
-
-
-function get_object(type){
-    if (type == "background") {
-        return movingImage;
-    }
-}
-
 document.addEventListener('keydown', (event) => {
     if (event.key === "l") {
         draw_game_screen("lose");
@@ -44,3 +33,5 @@ new Section().create_skins();
 new Section().create_rewards();
 new Section().create_setting();
 new Section().create_main_page();
+
+start_game();
