@@ -1,89 +1,105 @@
 var canvas = document.getElementById("main_canvas");
 var ctx = canvas.getContext("2d");
 
-class Cars {
-    constructor(speed, lane, pos_y, w, h, src) {
+class Cars extends Observer {
+    constructor(speed, lane, pos_y, src) {
+        super();
         this.speed = speed;
         this.image = new Image();
         this.lane = lane;
         this.image.src = src;
         this.new_x_pos = null;
+        this.cars = [];
+        // this.observer = new Observer();
         this.position = {
             "x": 0,
             "y": pos_y,
-            "width": w,
-            "height": h
+            "width": 100,
+            "height": 100
         }
         this.image.onload = () => {
+            this.position.width = this.image.width;
+            this.position.height = this.image.height;
             this.draw_object();
+            this.cars.push(this);
         };
     }
-    
+
     draw_object() {
         this.set_positions();
         ctx.clearRect(this.position.x, this.position.y - 5, this.position.width, this.position.height);
         ctx.drawImage(this.image, this.position.x, this.position.y, this.position.width, this.position.height);
     }
-    
+
     move_back() {
         let animateFrame = () => {
             if (this.position.y - this.position.height < canvas.height) {
                 this.position.y += this.speed;
+                this.notify(this.cars);
                 this.draw_object();
                 setTimeout(animateFrame, 10);
-            }
-        }
-        animateFrame();
-    }
-    
-    move_back_right() {
-        if (this.new_x_pos == null) {
-            if (this.position.x == 0) {
-                this.set_positions();
-            }
-            this.new_x_pos = this.position.x + (1000/6);
-        }
-        let animateFrame = () => {
-            if (this.position.y < canvas.height) {
-                this.position.y += this.speed;
-                if (this.new_x_pos > this.position.x && this.position.y > canvas.height/8) {
-                    this.position.x += this.speed;
+            } else {
+                let i = 0;
+                while (i < this.cars.length) {
+                    if (this.cars[i] === this) {
+                        this.cars.splice(i, 1);
+                        break;
+                    }
+                    i++;
                 }
-                this.draw_object();
-                setTimeout(animateFrame, 10);
-            }else{
-                this.new_x_pos = null;
             }
         }
         animateFrame();
     }
 
-    move_back_left() {
-        if (this.new_x_pos == null) {
-            this.new_x_pos = this.position.x + (1000/6);
-            console.log(this.new_x_pos);
-        }
-        let animateFrame = () => {
-            if (this.position.y - this.position.height < canvas.height) {
-                this.position.y += this.speed;
-                if (this.new_x_pos > this.position.x && this.position.y > canvas.height/8) {
-                    this.position.x -= this.speed;
+        move_back_right() {
+            if (this.new_x_pos == null) {
+                if (this.position.x == 0) {
+                    this.set_positions();
                 }
-                this.draw_object();
-                setTimeout(animateFrame, 10);
-            }else{
-                this.new_x_pos = null;
+                this.new_x_pos = this.position.x + (1000 / 6);
             }
+            let animateFrame = () => {
+                if (this.position.y < canvas.height) {
+                    this.position.y += this.speed;
+                    if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
+                        this.position.x += this.speed;
+                    }
+                    this.draw_object();
+                    setTimeout(animateFrame, 10);
+                } else {
+                    this.new_x_pos = null;
+                }
+            }
+            animateFrame();
         }
-        animateFrame();
-    }
 
-    set_positions(){
-        let offset = ((1000/6) - this.position.width)/2;
-        this.position.x = (1000/6) * this.lane + offset;
-    }
+        move_back_left() {
+            if (this.new_x_pos == null) {
+                this.new_x_pos = this.position.x + (1000 / 6);
+                console.log(this.new_x_pos);
+            }
+            let animateFrame = () => {
+                if (this.position.y - this.position.height < canvas.height) {
+                    this.position.y += this.speed;
+                    if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
+                        this.position.x -= this.speed;
+                    }
+                    this.draw_object();
+                    setTimeout(animateFrame, 10);
+                } else {
+                    this.new_x_pos = null;
+                }
+            }
+            animateFrame();
+        }
 
-}
+        set_positions() {
+            let offset = ((1000 / 6) - this.position.width) / 2;
+            this.position.x = (1000 / 6) * this.lane + offset;
+        }
+
+    }
 
 /*
 min - 40 bod

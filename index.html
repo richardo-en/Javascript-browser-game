@@ -15,8 +15,14 @@
   <body>
     <canvas id="main_canvas" class="not_touchable" width="1000px" height="600px"></canvas>
   </body>
+
+  <form method="post" action="update_file.php">
+    <input type="submit" value="Save">
+  </form>
+
   <div id="background_image"></div>
-  <!-- <script src="/data/data.js"></script> -->
+  <script src="/data/data.js"></script>
+  <script src="/js/observer/observer.js"></script>
   <script src="/js/model/player.js"></script>
   <script src="/js/view/draw_cars.js"></script>
   <script src="/js/view/draw_levels.js"></script>

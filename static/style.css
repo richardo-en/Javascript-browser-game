@@ -19,12 +19,12 @@
     width: 1000px;
     height: 600px;
     background: url('/static/images/infinite_road.png') repeat-y;
-    animation: moveBackground 5s linear infinite;
+    animation: moveBackground 4s linear infinite;
   }
   
   @keyframes moveBackground {
     from {
-      background-position-y: 0;
+      background-position-y: 0px;
     }
     to {
       background-position-y: 600px;

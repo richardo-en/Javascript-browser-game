@@ -27,7 +27,7 @@ audio.addEventListener("ended", function () {
 
 
 function save_settings_button() {
-    // set_settings_values();
+    set_settings_values();
     new Section().create_main_page();
 }
 function draw_help_screen() {
@@ -46,7 +46,7 @@ function remove_all_elements() {
             element.style.display = 'none';
         });
     });
-}; 
+};
 
 
 //Settings
@@ -89,28 +89,44 @@ function check_for_existing_elements(identifier) {
 
 function start_game() {
     remove_all_elements();
-    // player = new Player("/static/images/cars/police/german_police_car.png");
-    // let car = new Cars(5, 0, -300 , 100, 200, "/static/images/cars/police/german_police_car.png");
-    // car.move_back_right();
-    new Levels().easy_algorythm_3();
+    document.getElementById("background_image").style.animationDuration = "2s";
+    player = new Player("/static/images/cars/police/german_police_car.png");
+
+    function runLevels() {
+    let line = player.calculate_line();
+    if (line == 1 || line == 6) {
+        new Levels(line).easy_algorythm_1(player);
+        console.log("module 1 bol vykresleny")
+    } else if (line == 2 || line == 5) {
+        new Levels(line).easy_algorythm_2(player);
+        console.log("module 2 bol vykresleny")
+    } else {
+        new Levels(line).easy_algorythm_3(player);
+        console.log("module 3 bol vykresleny")
+    }
+    level_maker = null;
+    setTimeout(runLevels, 2000);
+    }
+
+    runLevels();
 };
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "d") {
-        player.start_move_right();
-    }
-    else if (event.key === "a") {
-        player.start_move_left();
-    }
-});
+// document.addEventListener("keydown", (event) => {
+//     if (event.key === "d") {
+//         player.start_move_right();
+//     }
+//     else if (event.key === "a") {
+//         player.start_move_left();
+//     }
+// });
 
-document.addEventListener("keyup", (event) => {
-    if (event.key === "d") {
-        player.stop_move_right();
-        player.reset_rotation();
-    }
-    else if (event.key === "a") {
-        player.stop_move_left();
-        player.reset_rotation();
-    }
-});
+// document.addEventListener("keyup", (event) => {
+//     if (event.key === "d") {
+//         player.stop_move_right();
+//         player.reset_rotation();
+//     }
+//     else if (event.key === "a") {
+//         player.stop_move_left();
+//         player.reset_rotation();
+//     }
+// });

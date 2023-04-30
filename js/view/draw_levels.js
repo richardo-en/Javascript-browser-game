@@ -1,65 +1,81 @@
 var canvas = document.getElementById("main_canvas");
-var ctx = canvas.getContext("2d");
 
-class Levels{
-    constructor(){}
+class Levels {
+    constructor(line){
+        this.line = line
+    }
 
-    easy_algorythm_1(){
-        new Cars(2, 0, 0, 100, 166, "/static/images/cars/blue_car.png");
-        new Cars(2, 1, 200, 100, 166, "/static/images/cars/blue_car.png");
-        /*
-        if (hrac je na lavej casti obrazovky) {
-            new Cars(2, 1, 0, 100, 166, "/static/images/cars/yellow_car.png");
-            new Cars(2, 2, 200, 100, 166, "/static/images/cars/yellow_car.png");
-        }
-        else if (hrac je na lavej casti obrazovky) {
-            new Cars(2, 4, 0, 100, 166, "/static/images/cars/red_car.png");
-            new Cars(2, 3, 200, 100, 166, "/static/images/cars/red_car.png");
-        }
-            
-        */
-        new Cars(2, 5, 0, 100, 166, "/static/images/cars/blue_car.png");
-        new Cars(2, 4, 200, 100, 166, "/static/images/cars/blue_car.png");
-    }   
+    easy_algorythm_1(player) {
+        var new_cars = [];
+        new_cars.push(new Cars(4, 0, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 1, 200 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 5, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 4, 200 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
 
-    easy_algorythm_2(){
-        new Cars(2, 0, 300, 100, 166, "/static/images/cars/blue_car.png");
-        new Cars(2, 1, 0, 100, 166, "/static/images/cars/blue_car.png");
-        /*
-        if (hrac je v 2 pruhu) {
-            new Cars(2, 4, 200, 100, 166, "/static/images/cars/red_car.png");
-            new Cars(2, 2, 300, 100, 166, "/static/images/cars/red_car.png");
+        if (this.line == 1) {
+            new_cars.push(new Cars(4, 1, 0 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 2, 200 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
         }
-        else if (hrac je v 5 pruhu) {
-            new Cars(2, 1, 200, 100, 166, "/static/images/cars/yellow_car.png");
-            new Cars(2, 3, 300, 100, 166, "/static/images/cars/yellow_car.png");
+        else if (this.line == 6) {
+            new_cars.push(new Cars(4, 4, 0 - canvas.clientHeight, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 3, 200 - canvas.clientHeight, "/static/images/cars/red_car.png"));
         }
+
+        for (let i = 0; i < new_cars.length; i++) {
+            new_cars[i].subscribe(player);
+            new_cars[i].move_back();
+        }
+    }
+
+    easy_algorythm_2(player) {
+        var new_cars = [];
+        new_cars.push(new Cars(4, 0, 300 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 1, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));   
+        new_cars.push(new Cars(4, 4, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 5, 300 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+
+        if (this.line == 2) {
+            new_cars.push(new Cars(4, 4, 200 - canvas.clientHeight, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 2, 300 - canvas.clientHeight, "/static/images/cars/red_car.png"));
+        }
+        else if (this.line == 5) {
+            new_cars.push(new Cars(4, 1, 200 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 3, 300 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
+        }
+
+        for (let i = 0; i < new_cars.length; i++) {
+            new_cars[i].subscribe(player);
+            new_cars[i].move_back();
+        }
+    }
+
+    easy_algorythm_3(player) {
+        var new_cars = [];
+        new_cars.push(new Cars(4, 0, 400 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 2, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 3, 0 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 5, 300 - canvas.clientHeight, "/static/images/cars/blue_car.png"));
+
         
-        */
-       new Cars(2, 4, 0, 100, 166, "/static/images/cars/blue_car.png");
-       new Cars(2, 5, 300, 100, 166, "/static/images/cars/blue_car.png");
-    }  
-
-    easy_algorythm_3(){
-        new Cars(2, 0, 400, 100, 166, "/static/images/cars/blue_car.png");
-        new Cars(2, 2, 0, 100, 166, "/static/images/cars/blue_car.png");
-
-        /*
-        if (hrac je v 3 pruhu) {
-            new Cars(2, 4, 0, 100, 166, "/static/images/cars/red_car.png");
-            new Cars(2, 3, 200, 100, 166, "/static/images/cars/red_car.png");
-            new Cars(2, 1, 400, 100, 166, "/static/images/cars/red_car.png");
+        if (this.line == 3) {
+            new_cars.push(new Cars(4, 4, 0 - canvas.clientHeight, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 3, 200 - canvas.clientHeight, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 1, 400 - canvas.clientHeight, "/static/images/cars/red_car.png"));
         }
-        else if (hrac je na lavej casti obrazovky) {
-            new Cars(2, 1, 0, 100, 166, "/static/images/cars/yellow_car.png");
-            new Cars(2, 2, 200, 100, 166, "/static/images/cars/yellow_car.png");
-            new Cars(2, 4, 400, 100, 166, "/static/images/cars/yellow_car.png");
+        else if (this.line == 4){
+            new_cars.push(new Cars(4, 1, 0 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 2, 200 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 4, 400 - canvas.clientHeight, "/static/images/cars/yellow_car.png"));
         }
-        
-        */
-       new Cars(2, 3, 0, 100, 166, "/static/images/cars/blue_car.png");
-       new Cars(2, 5, 300, 100, 166, "/static/images/cars/blue_car.png");
-    }  
 
+        for (let i = 0; i < new_cars.length; i++) {
+            new_cars[i].subscribe(player);
+            new_cars[i].move_back();
+        }
+    }
 
 }
+
+//footer - biele pozadia
+// menu cierne
+// hentu picovinu a nejaky gradient

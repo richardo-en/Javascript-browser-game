@@ -34,4 +34,4 @@ new Section().create_rewards();
 new Section().create_setting();
 new Section().create_main_page();
 
-start_game();
+// start_game();

@@ -6,12 +6,14 @@ class Player {
         this.image = new Image();
         this.image.src = image_path;
         this.position = {
-            "x": 490,
+            "x": ((1000/6) * 2) - 100,
             "y": 400,
-            "width" : 100,
-            "height" : 180
+            "width": 100,
+            "height": 180
         }
         this.image.onload = () => {
+            this.position.height = this.image.height * 1.8;
+            this.position.width = this.image.width * 1.8;
             this.draw_player_to_canvas();
         };
         this.speed = 10;
@@ -23,13 +25,37 @@ class Player {
     draw_player_to_canvas() {
         // const [clearX, clearY, clearWidth, clearHeight] = this.get_clear_rect();
         // ctx.clearRect(clearX - 10, clearY - 10, clearWidth + 20, clearHeight + 20);
-        ctx.clearRect(this.position.x - 10 - (this.rotation *0.85), this.position.y - (this.rotation * 0.5), this.position.width + 20 + (this.rotation *0.8), this.position.height + (this.rotation));
+        ctx.clearRect(this.position.x - 10 - (this.rotation * 0.85), this.position.y - (this.rotation * 0.5), this.position.width + 20 + (this.rotation * 0.8), this.position.height + (this.rotation));
         ctx.save();
         ctx.translate(this.position.x + this.position.width / 2, this.position.y + this.position.height / 2);
         ctx.rotate(this.rotation * Math.PI / 180);
         ctx.drawImage(this.image, -this.position.width / 2, -this.position.height / 2, this.position.width, this.position.height);
         ctx.restore();
     }
+
+    check_collision(cars) {
+        for (let i = 0; i < cars.length; i++) {
+            var car = cars[i];
+            let y_bottom = this.position.y + this.position.height;
+            let x_opposite_side = this.position.x + this.position.width;
+            let car_y_bottom = car.position.y + car.position.height;
+            let car_x_opposite_side = car.position.x + car.position.width
+            if ((
+                (car.position.x < this.position.x && car_x_opposite_side > this.position.x) || (x_opposite_side > car.position.x && x_opposite_side < car_x_opposite_side)
+                )&&(
+                (this.position.y > car.position.y && this.position.y < car_y_bottom) || (y_bottom < car_y_bottom && y_bottom > car.position.y))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    update(cars) {
+        if(this.check_collision(cars)){
+            alert("coliziaa!!!");
+        }
+    }
+
 
     start_move_right() {
         if (this.moveInterval === null) {
@@ -75,35 +101,33 @@ class Player {
 
     reset_rotation() {
         if (this.rotationAnimating) {
-          return;
+            return;
         }
-      
+
         this.rotationAnimating = true;
-      
+
         const animateFrame = () => {
-          if (this.rotation !== 0) {
-            this.rotation -=  Math.sign(this.rotation);
-            this.draw_player_to_canvas();
-            setTimeout(animateFrame, 10);
-          } else {
-            this.rotationAnimating = false;
-          }
+            if (this.rotation !== 0) {
+                this.rotation -= Math.sign(this.rotation);
+                this.draw_player_to_canvas();
+                setTimeout(animateFrame, 10);
+            } else {
+                this.rotationAnimating = false;
+            }
         };
-      
+
         animateFrame();
         setTimeout(() => { this.rotationAnimating = false; }, 10);
-      }
-      
+    }
 
-      get_clear_rect() {
-        const rotationOffsetX = Math.abs(Math.sin(this.rotation * Math.PI / 180) * this.position.height / 2);
-        const rotationOffsetY = Math.abs(Math.cos(this.rotation * Math.PI / 180) * this.position.height / 2);
-        const minX = Math.min(this.position.x, this.position.x + this.position.width / 2 - rotationOffsetX);
-        const minY = Math.min(this.position.y, this.position.y + this.position.height / 2 - rotationOffsetY);
-        const maxX = Math.max(this.position.x + this.position.width, this.position.x + this.position.width / 2 + rotationOffsetX);
-        const maxY = Math.max(this.position.y + this.position.height, this.position.y + this.position.height / 2 + rotationOffsetY);
-        const clearWidth = maxX - minX;
-        const clearHeight = maxY - minY;
-        return [minX, minY, clearWidth, clearHeight];
-      }
+    calculate_line(){
+        let line_width = 1000/6;
+        let temporary_id = 0;
+        let line_id = 0;
+        while (this.position.x + (this.position.width/2) > temporary_id) {
+            temporary_id += line_width;
+            line_id++; 
+        }
+        return line_id;
+    }
 }
