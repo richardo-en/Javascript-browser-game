@@ -26,6 +26,9 @@ class Section {
             new Button(40, 70, identifier, this.create_setting).draw_button('Nastavenia');
             new Button(20, 38.5, identifier).draw_image("/static/images/game_logo.png");
             new Button(80, 50, identifier, draw_help_screen).draw_button('Help');
+            new Button(80, 15, identifier, start_game_controller).draw_level_button('1');
+            new Button(80, 21, identifier, start_game_controller).draw_level_button('2');
+            new Button(80, 27, identifier, start_game_controller).draw_level_button('3');
         };
     }
     
@@ -34,10 +37,11 @@ class Section {
         let look_for_buttons = check_for_existing_elements(identifier);
         if (look_for_buttons == false) {
             new Button(80, 51, identifier, this.create_main_page).draw_button("Späť");
-            new Button(20, 30, identifier, this.test).draw_reward_buttons();
-            new Button(40, 30, identifier, this.test).draw_reward_buttons();
-            new Button(60, 30, identifier, this.test).draw_reward_buttons();
+            new Button(20, 30, identifier, check_for_rewards).draw_reward_buttons("played_games");
+            new Button(40, 30, identifier, check_for_rewards).draw_reward_buttons("reached_level");
+            new Button(60, 30, identifier, check_for_rewards).draw_reward_buttons("owned_cars"); 
         };
+        set_rewards_text();
     }
     
     create_setting() {
@@ -52,8 +56,8 @@ class Section {
             new Button(10, 60, identifier, this.test).draw_input_button("movement_left");
             new Button(30, 60, identifier, this.test).draw_input_button("movement_right");
             new Button(50, 50, identifier, set_volume).draw_volume_slider("volume_bar");
-            // load_setting_vlues();
         };
+        load_setting_vlues();
     }
     
     test() {

@@ -5,6 +5,7 @@ class Cars extends Observer {
     constructor(speed, lane, pos_y, src) {
         super();
         this.speed = speed;
+        this.name = "car";
         this.image = new Image();
         this.lane = lane;
         this.image.src = src;
@@ -13,7 +14,7 @@ class Cars extends Observer {
         // this.observer = new Observer();
         this.position = {
             "x": 0,
-            "y": pos_y,
+            "y": pos_y - canvas.clientHeight,
             "width": 100,
             "height": 100
         }
@@ -23,21 +24,23 @@ class Cars extends Observer {
             this.draw_object();
             this.cars.push(this);
         };
+        this.animateFrame = null;
+        this.animate = true;
     }
 
     draw_object() {
         this.set_positions();
-        ctx.clearRect(this.position.x, this.position.y - 5, this.position.width, this.position.height);
+        ctx.clearRect(this.position.x-5, this.position.y - 5, this.position.width + 10, this.position.height + 5);
         ctx.drawImage(this.image, this.position.x, this.position.y, this.position.width, this.position.height);
     }
 
     move_back() {
-        let animateFrame = () => {
-            if (this.position.y - this.position.height < canvas.height) {
+        this.animateFrame = () => {
+            if (this.animate && this.position.y - this.position.height < canvas.height) {
                 this.position.y += this.speed;
                 this.notify(this.cars);
                 this.draw_object();
-                setTimeout(animateFrame, 10);
+                setTimeout(this.animateFrame, 5);
             } else {
                 let i = 0;
                 while (i < this.cars.length) {
@@ -49,57 +52,64 @@ class Cars extends Observer {
                 }
             }
         }
-        animateFrame();
+
+        this.animateFrame();
     }
 
-        move_back_right() {
-            if (this.new_x_pos == null) {
-                if (this.position.x == 0) {
-                    this.set_positions();
-                }
-                this.new_x_pos = this.position.x + (1000 / 6);
+    move_back_right() {
+        if (this.new_x_pos == null) {
+            if (this.position.x == 0) {
+                this.set_positions();
             }
-            let animateFrame = () => {
-                if (this.position.y < canvas.height) {
-                    this.position.y += this.speed;
-                    if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
-                        this.position.x += this.speed;
-                    }
-                    this.draw_object();
-                    setTimeout(animateFrame, 10);
-                } else {
-                    this.new_x_pos = null;
-                }
-            }
-            animateFrame();
+            this.new_x_pos = this.position.x + (1000 / 6);
         }
-
-        move_back_left() {
-            if (this.new_x_pos == null) {
-                this.new_x_pos = this.position.x + (1000 / 6);
-                console.log(this.new_x_pos);
-            }
-            let animateFrame = () => {
-                if (this.position.y - this.position.height < canvas.height) {
-                    this.position.y += this.speed;
-                    if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
-                        this.position.x -= this.speed;
-                    }
-                    this.draw_object();
-                    setTimeout(animateFrame, 10);
-                } else {
-                    this.new_x_pos = null;
+        this.animateFrame = () => {
+            if (this.position.y < canvas.height) {
+                this.position.y += this.speed;
+                if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
+                    this.position.x += this.speed;
                 }
+                this.draw_object();
+                if (this.animate == true) {
+                    setTimeout(this.animateFrame, 10);
+                }
+            } else {
+                this.new_x_pos = null;
             }
-            animateFrame();
         }
-
-        set_positions() {
-            let offset = ((1000 / 6) - this.position.width) / 2;
-            this.position.x = (1000 / 6) * this.lane + offset;
-        }
-
+        this.animateFrame();
     }
+
+    move_back_left() {
+        if (this.new_x_pos == null) {
+            this.new_x_pos = this.position.x + (1000 / 6);
+        }
+        this.animateFrame = () => {
+            if (this.position.y - this.position.height < canvas.height) {
+                this.position.y += this.speed;
+                if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
+                    this.position.x -= this.speed;
+                }
+                this.draw_object();
+                setTimeout(this.animateFrame, 10);
+            } else {
+                this.new_x_pos = null;
+            }
+        }
+        this.animateFrame();
+    }
+
+    set_positions() {
+        let offset = ((1000 / 6) - this.position.width) / 2;
+        this.position.x = (1000 / 6) * this.lane + offset;
+    }
+
+    stop_animation() {
+        cancelAnimationFrame(this.animationFrameId);
+        this.animationFrameId = null;
+    }
+
+}
 
 /*
 min - 40 bod

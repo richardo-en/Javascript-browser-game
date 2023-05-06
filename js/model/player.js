@@ -6,7 +6,7 @@ class Player {
         this.image = new Image();
         this.image.src = image_path;
         this.position = {
-            "x": ((1000/6) * 2) - 100,
+            "x": ((1000 / 6) * 6) - 100,
             "y": 400,
             "width": 100,
             "height": 180
@@ -20,39 +20,140 @@ class Player {
         this.rotation = 0;
         this.rotationSpeed = 2;
         this.moveInterval = null;
+        this.rotated_position = [
+            {
+                "top_left": null,
+                "top_right": null,
+                "bottom_left": null,
+                "bottom_right": null
+            }
+        ]
+        this.position_to_remove = [
+            {
+                "x_begin": this.position.x,
+                "y_begin": this.position.y,
+                "width": this.position.width,
+                "height": this.position.height
+            }
+        ]
     }
 
     draw_player_to_canvas() {
-        // const [clearX, clearY, clearWidth, clearHeight] = this.get_clear_rect();
-        // ctx.clearRect(clearX - 10, clearY - 10, clearWidth + 20, clearHeight + 20);
-        ctx.clearRect(this.position.x - 10 - (this.rotation * 0.85), this.position.y - (this.rotation * 0.5), this.position.width + 20 + (this.rotation * 0.8), this.position.height + (this.rotation));
+        ctx.clearRect(this.position_to_remove.x_begin, this.position_to_remove.y_begin, this.position_to_remove.width, this.position_to_remove.height);
         ctx.save();
         ctx.translate(this.position.x + this.position.width / 2, this.position.y + this.position.height / 2);
         ctx.rotate(this.rotation * Math.PI / 180);
         ctx.drawImage(this.image, -this.position.width / 2, -this.position.height / 2, this.position.width, this.position.height);
         ctx.restore();
+        var new_positions_clear = calculate_new_positions([this.position.x, this.position.y, this.position.width, this.position.height, this.rotation]);
+        this.position_to_remove.x_begin = new_positions_clear[4][0];
+        this.position_to_remove.y_begin = new_positions_clear[4][1];
+        this.position_to_remove.width = new_positions_clear[4][2];
+        this.position_to_remove.height = new_positions_clear[4][3];
+
+        ctx.fillStyle = "red";
+        // ctx.fillRect(new_positions_clear[4][0],  new_positions_clear[4][1] ,5,5);
+        // ctx.fillRect(new_positions_clear[4][2], new_positions_clear[4][3] ,5,5);
     }
 
     check_collision(cars) {
+
+        var new_positions_clear = calculate_new_positions([this.position.x, this.position.y, this.position.width, this.position.height, this.rotation]);
+        this.position_to_remove.x_begin = new_positions_clear[4][0];
+        this.position_to_remove.y_begin = new_positions_clear[4][1];
+        this.position_to_remove.width = new_positions_clear[4][2];
+        this.position_to_remove.height = new_positions_clear[4][3];
+
+        this.rotated_position.top_left = new_positions_clear[0]
+        this.rotated_position.top_right = new_positions_clear[1]
+        this.rotated_position.bottom_left = new_positions_clear[2]
+        this.rotated_position.bottom_right = new_positions_clear[3]
+        var collision_points = [], is_from_left = false, is_from_right = false, is_from_above = false, is_from_under = false, temporary_lowest_y = null, index;
+        var lowest_y = Number.MAX_VALUE;
         for (let i = 0; i < cars.length; i++) {
             var car = cars[i];
-            let y_bottom = this.position.y + this.position.height;
-            let x_opposite_side = this.position.x + this.position.width;
-            let car_y_bottom = car.position.y + car.position.height;
-            let car_x_opposite_side = car.position.x + car.position.width
-            if ((
-                (car.position.x < this.position.x && car_x_opposite_side > this.position.x) || (x_opposite_side > car.position.x && x_opposite_side < car_x_opposite_side)
-                )&&(
-                (this.position.y > car.position.y && this.position.y < car_y_bottom) || (y_bottom < car_y_bottom && y_bottom > car.position.y))) {
-                return true;
+            //Check for Y positions
+            // ctx.fillRect(this.position_to_remove.x_begin + this.position_to_remove.width, this.position.y ,5,5)
+            if (car.position.x + car.position.width > this.position_to_remove.x_begin && car.position.x + car.position.width < this.position_to_remove.x_begin + this.position_to_remove.width) {
+                collision_points = this.calculate_collision_points(this.rotated_position.top_left[0], this.rotated_position.top_left[1], this.rotated_position.bottom_left[0], this.rotated_position.bottom_left[1]);
+                is_from_left = true;
+            } else if ((car.position.x < this.position_to_remove.x_begin + this.position_to_remove.width) && (car.position.x > this.position_to_remove.x_begin)) {
+                collision_points = this.calculate_collision_points(this.rotated_position.top_right[0], this.rotated_position.top_right[1], this.rotated_position.bottom_right[0], this.rotated_position.bottom_right[1]);
+                is_from_right = true;
             }
+            if (car.position.y > this.position_to_remove.y_begin && car.position.y < this.position_to_remove.y_begin + this.position_to_remove.height) {
+                is_from_under = true;
+            } else if (car.position.y + car.position.height > this.position_to_remove.y_begin && car.position.y + car.position.height < this.position_to_remove.y_begin + this.position_to_remove.height) {
+                is_from_above = true;
+            }
+            if ((is_from_left == true || is_from_right == true) && (is_from_under == true || is_from_above == true)) {
+                for (let a = 0; a < collision_points[0].length; a++) {
+                    if (is_from_under == true) {
+                        temporary_lowest_y = collision_points[1][a] - car.position.y;
+                    } else {
+                        temporary_lowest_y = collision_points[1][a] - car.position.y + car.position.height;
+                    }
+
+
+                    if (temporary_lowest_y < 0) {
+                        temporary_lowest_y *= (-1);
+                    }
+
+                    if (temporary_lowest_y == null) {
+                        lowest_y = temporary_lowest_y;
+                    } else if (temporary_lowest_y < lowest_y) {
+                        lowest_y = temporary_lowest_y;
+                        index = a;
+                    }
+                }
+                for (let c = 0; c < collision_points[0].length; c++) {
+                    ctx.fillRect(collision_points[0][c], collision_points[1][c], 5, 5);
+                }
+                if (is_from_left == true) {
+                    if (car.position.x + car.position.width - 5> collision_points[0][index]) {
+                        return true
+                    }
+                } else if (is_from_right == true) {
+                    if (car.position.x + 5 < collision_points[0][index]) {
+                        return true
+                    }
+                };
+                index = null;
+                lowest_y = null;
+                collision_points = [];
+            }
+            is_from_left = false, is_from_right = false, is_from_above = false, is_from_under = false
         }
-        return false;
+    }
+
+    calculate_collision_points(first_point_x, first_point_y, second_point_x, second_point_y) {
+        var collision_points_x = [first_point_x, second_point_x]
+        var collision_points_y = [first_point_y, second_point_y]
+        for (let i = 1; i < 4; i++) {
+            collision_points_y.push(collision_points_y[i] + ((collision_points_y[0] - collision_points_y[i]) / 2))
+            collision_points_x.push(collision_points_x[i] + ((collision_points_x[0] - collision_points_x[i]) / 2))
+        }
+
+        collision_points_y.push(collision_points_y[2] + ((collision_points_y[3] - collision_points_y[2]) / 2))
+        collision_points_x.push(collision_points_x[2] + ((collision_points_x[3] - collision_points_x[2]) / 2))
+
+        collision_points_y.push(collision_points_y[1] + ((collision_points_y[0] - collision_points_y[2]) / 2))
+        collision_points_x.push(collision_points_x[1] + ((collision_points_x[0] - collision_points_x[2]) / 2))
+
+        collision_points_y.push(collision_points_y[1] + ((collision_points_y[0] - collision_points_y[3]) / 2))
+        collision_points_x.push(collision_points_x[1] + ((collision_points_x[0] - collision_points_x[3]) / 2))
+
+
+        collision_points_y.push(collision_points_y[6] + ((collision_points_y[0] - collision_points_y[3]) / 2))
+        collision_points_x.push(collision_points_x[6] + ((collision_points_x[0] - collision_points_x[3]) / 2))
+
+        return [collision_points_x, collision_points_y]
     }
 
     update(cars) {
-        if(this.check_collision(cars)){
-            alert("coliziaa!!!");
+        if (this.check_collision(cars)) {
+            stop_animation("lose");
+            increase_status(0);
         }
     }
 
@@ -120,13 +221,13 @@ class Player {
         setTimeout(() => { this.rotationAnimating = false; }, 10);
     }
 
-    calculate_line(){
-        let line_width = 1000/6;
+    calculate_line() {
+        let line_width = 1000 / 6;
         let temporary_id = 0;
         let line_id = 0;
-        while (this.position.x + (this.position.width/2) > temporary_id) {
+        while (this.position.x + (this.position.width / 2) > temporary_id) {
             temporary_id += line_width;
-            line_id++; 
+            line_id++;
         }
         return line_id;
     }

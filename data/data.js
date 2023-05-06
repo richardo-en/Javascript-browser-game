@@ -1,50 +1,116 @@
+var quests = [
+  {
+    "reward": 20,
+    "current_status": 0,
+    "reward_goal": 10
+  },
+  {
+    "reward": 50,
+    "current_status": 0,
+    "reward_goal": 1
+  },
+  {
+    "reward": 20,
+    "current_status": 2,
+    "reward_goal": 2
+  }
+]
 
-function load_setting_vlues() {
-  let mute_button = document.getElementById("button_container");
-  let audio = document.getElementById("volume_bar");
-  fetch('/data/settings.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("movement_left").value = data.button_left.toUpperCase();
-      document.getElementById("movement_right").value = data.button_right.toUpperCase();
-      audio.value = data.volume;
-      if (data.volume == 0 && mute_button.className == "on") {
-        switch_mute_image()
-        audio.currentTime = 0;
-      }
-      document.getElementById("my_audio").volume = data.volume / 100;
-    })
+var basic_settings = ['A', 'D', 50];
+var coin = 10;
+var levels = [{
+  "unlocked_level": 1,
+  "current_level": 1
+}];
+
+if (!checkCookieExistence()) {
+  var expiration_date = new Date();
+  expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+  document.cookie = "quests=" + JSON.stringify(quests) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  document.cookie = "basic_settings=" + JSON.stringify(basic_settings) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  document.cookie = "coin=" + coin + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  document.cookie = "levels=" + JSON.stringify(levels) + "; expires=" + expiration_date.toUTCString() + "; path=/";
 }
 
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) {
+    return parts.pop().split(";").shift();
+  }
+}
+
+function upload_to_cokiee(name, object) {
+  var expiration_date = new Date();
+  expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+  document.cookie = name + "=" + JSON.stringify(object) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+}
+
+
+function load_setting_vlues() {
+  var parsed_data = JSON.parse(getCookie('basic_settings'));;
+
+  document.getElementById("movement_left").value = parsed_data[0];
+  let mute_button = document.getElementById("button_container");
+  let audio = document.getElementById("volume_bar");
+  document.getElementById("movement_right").value = parsed_data[1];
+  audio.value = parsed_data[2];
+  if (parsed_data[2] == 0 && mute_button.className == "on") {
+    switch_mute_image();
+    audio.currentTime = 0;
+  }
+  document.getElementById("my_audio").volume = parsed_data[2] / 100;
+};
+
 function set_settings_values() {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      const data = JSON.parse(xhr.responseText);
+  basic_settings[0] = document.getElementById("movement_left").value;
+  basic_settings[1] = document.getElementById("movement_right").value;
+  basic_settings[2] = document.getElementById("my_audio").volume;
+  upload_to_cokiee("basic_settings", basic_settings);
+};
 
-      // modify the data as needed
-      let audio = document.getElementById("volume_bar");
-      let movement_left = document.getElementById("movement_left").value.toUpperCase();
-      let movement_right = document.getElementById("movement_right").value.toUpperCase();
-      let volume = audio.volume;
-      let newData = Object.entries(data).map(([key, value]) => ({ [key]: value }));
-      newData.push({ button_left: movement_left, button_right: movement_right, volume: volume });
-
-      // write the modified data back to the file using AJAX
-      const xhr2 = new XMLHttpRequest();
-      xhr2.onreadystatechange = function () {
-        if (xhr2.readyState === 4 && xhr2.status === 200) {
-          console.log(xhr2.responseText);
-        } else {
-          console.log("Error: " + xhr2.status);
-        }
-      };
-      xhr2.open("POST", "/save.php"); // replace "save.php" with the URL of your server-side script that handles saving the data
-      xhr2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhr2.send(JSON.stringify(newData));
-      console.log("picaaaaaaaa");
+function set_rewards_text() {
+  var ids = ["played_games", "reached_level", "owned_cars"];
+  var quests = JSON.parse(getCookie('quests'));
+  for (let i = 0; i < ids.length; i++) {
+    let reward_button = document.getElementById(ids[i]);
+    if (i == 0) {
+      reward_button.innerHTML = "Play " + quests[0].reward_goal + " games and earn " + quests[0].reward + " coins!";
+    } else if (i == 1) {
+      reward_button.innerHTML = "Reach level " + quests[1].reward_goal + " and earn " + quests[1].reward + " coins!";
+    } else if (i == 2) {
+      reward_button.innerHTML = "Own " + quests[2].reward_goal + " cars and earn " + quests[2].reward + " coins!";
     }
-  };
-  xhr.open("GET", "data/settings.json"); // replace "data.json" with the name of your JSON file
-  xhr.send();
+  }
+}
+
+function increase_reward(index) {
+  var quests = JSON.parse(getCookie('quests'));
+  quests[index].reward *= 1.5;
+  if (index > 0) {
+    quests[index].reward_goal++;
+  } else {
+    quests[index].reward_goal *= 2;
+  }
+  upload_to_cokiee("quests", quests);
+  set_rewards_text();
+}
+
+function checkCookieExistence() {
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].trim();
+    if (cookie.startsWith("basic_settings=")) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function increase_status(index) {
+  var quests = JSON.parse(getCookie('quests'));
+  quests[index].current_status++;
+  upload_to_cokiee("quests", quests);
+  var quests = JSON.parse(getCookie('quests'));
+  console.log(quests[0].current_status);
 }

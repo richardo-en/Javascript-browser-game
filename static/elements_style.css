@@ -18,6 +18,24 @@
     background-size: 250px 150px;
 }
 
+.lvl_button{
+    border-radius: 10px;
+    border: 3px solid black;
+    padding: 20px;
+    font-family: cursive;
+    font-weight: bold;
+    font-size: 20px;
+    /* max-width: 200px; */
+    background-image: url("/static/images/button_background.jpg");
+    overflow: hidden;
+    background-size: 200px 100px;
+    color: black;
+    transition: all 0.5s;
+}
+.lvl_button:hover{
+    background-size: 250px 150px;
+}
+
 /* SETTINGS VIEW */
 /* Volume button hover effect */
 #volume:hover{
@@ -65,6 +83,7 @@
     height: 5vh;
     border: 2px solid #202020;
     border-radius: 3px;
+    font-size: larger;
 }
 .reward_button{
     border: solid black 2px;
@@ -76,4 +95,42 @@
 .reward_button:hover{
     transform: scale(1.02);
     background: radial-gradient(#d1d1d1 , #0f6999);
+}
+
+.message{
+    color: white;
+    position: fixed;
+    top: 20px;
+    left: auto;
+    width: 30vw;
+    padding: 10px;
+    text-align: center;
+    opacity: 1;
+    font-size: large;
+    border-radius: 10px;
+    transition: opacity 0.5s ease-out;
+}
+
+@keyframes opacity_anim {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+  }
+
+#timer{
+    position: absolute;
+    right: 150px;
+    top: 800px;
+    color: black;
+}
+
+#timer_text{
+    height: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 50px;
+    margin: 0;
 }

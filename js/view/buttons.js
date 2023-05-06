@@ -45,6 +45,15 @@ class Button extends Button_parent{
         new_button.addEventListener("click" , this.function_to_execute);
     }
     
+    draw_level_button(level){
+        let new_button = document.createElement("button");
+        let section = this.check_section();
+        new_button.innerHTML = level;
+        new_button.className = "lvl_button";
+        section.appendChild(this.set_element_position(new_button, this.positon_top, this.position_left));
+        new_button.addEventListener("click" , this.function_to_execute);
+    }
+
     draw_image(image_source){
         var section = this.check_section();
         var image = document.createElement("img");
@@ -97,14 +106,16 @@ class Button extends Button_parent{
         var skin_button = document.createElement("button");
         skin_button.id = button_identifier;
         skin_button.className = "skin_button";
-        //Need of additional functions
+        //input_button.addEventListener("input", this.function_to_execute)
         section.appendChild(this.set_element_position(skin_button, this.positon_top, this.position_left));
     }
 
-    draw_reward_buttons(){
+    draw_reward_buttons(identifier){
         var section = this.check_section();
-        var skin_button = document.createElement("button");
-        skin_button.className = "reward_button";
-        section.appendChild(this.set_element_position(skin_button, this.positon_top, this.position_left));
+        var reward_button = document.createElement("button");
+        reward_button.className = "reward_button";
+        reward_button.id = identifier;
+        section.appendChild(this.set_element_position(reward_button, this.positon_top, this.position_left));
+        reward_button.addEventListener("click" , this.function_to_execute);
     }
 };

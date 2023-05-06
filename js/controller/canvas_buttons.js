@@ -7,6 +7,7 @@ function return_to_main_menu(){
     new Canvas_screens().clear_screen();
     new Section().create_main_page();
     canvas.className = "not_touchable"
+    reset();
 }
 
 canvas.addEventListener('click', function(event) {
@@ -23,7 +24,9 @@ canvas.addEventListener('click', function(event) {
                     if (i == 0) {
                         return_to_main_menu();
                     }else if(i == 1){
-                        alert("clicked reapet");
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        reset();
+                        start_game();
                     }
                 }else if (canvas_screen.get_type() == "win") {
                     if (i == 0) {
