@@ -134,3 +134,14 @@
     font-size: 50px;
     margin: 0;
 }
+
+#selected{
+    opacity: 100%;
+}
+.unlocked{
+    opacity: 75%;
+}
+.locked{
+    opacity: 50%;
+    pointer-events: none;
+}

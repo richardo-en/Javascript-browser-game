@@ -11,228 +11,244 @@ class Levels {
         this.additionals = [];
     }
 
-    easy_algorythm_1(player, list) {
+    easy_algorythm_1(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 180, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 180, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(2.5, 0, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 180, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 180, this.get_car(), player));
 
         if (this.line == 1) {
-            new_cars.push(new Cars(2.5, 4, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(2.5, 3, 200, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
         }
         else if (this.line == 6) {
-            new_cars.push(new Cars(2.5, 1, 0, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(2.5, 2, 200, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    easy_algorythm_2(player, list) {
+    easy_algorythm_2(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 0, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 450, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 450, this.get_car(), player));
 
         if (this.line == 2) {
-            new_cars.push(new Cars(2.5, 41, 200, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(2.5, 2, 300, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(2.5, 41, 200, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 2, 300, this.get_car(), player));
         }
         else if (this.line == 5) {
-            new_cars.push(new Cars(2.5, 1, 200, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(2.5, 3, 300, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(2.5, 1, 200, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 3, 300, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    easy_algorythm_3(player, list) {
+    easy_algorythm_3(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 300, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
 
 
         if (this.line == 3) {
-            new_cars.push(new Cars(2.5, 1, 0, "/static/images/cars/red_car.png")); 4
-            new_cars.push(new Cars(2.5, 2, 200, "/static/images/cars/red_car.png")); 3
-            new_cars.push(new Cars(2.5, 4, 400, "/static/images/cars/red_car.png")); 1
+            new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 4, 400, this.get_car(), player));
         }
         else if (this.line == 4) {
-            new_cars.push(new Cars(2.5, 4, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(2.5, 3, 200, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(2.5, 1, 400, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
+            new_cars.push(new Cars(2.5, 1, 400, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_1(player, list) {
+    medium_algorythm_1(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 2, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 3, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 5, 300, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(4, 2, 450, this.get_car(), player));
+        new_cars.push(new Cars(4, 3, 450, this.get_car(), player));
+        new_cars.push(new Cars(4, 5, 300, this.get_car(), player));
 
         if (this.line == 1) {
-            new_cars.push(new Cars(4, 1, 100, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 3, 100, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 5, 0, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 1, 100, this.get_car(), player));
+            new_cars.push(new Cars(4, 3, 100, this.get_car(), player));
+            new_cars.push(new Cars(4, 5, 0, this.get_car(), player));
         }
         else if (this.line == 6) {
-            new_cars.push(new Cars(4, 4, 100, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 2, 100, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 0, 0, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 4, 100, this.get_car(), player));
+            new_cars.push(new Cars(4, 2, 100, this.get_car(), player));
+            new_cars.push(new Cars(4, 0, 0, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_2(player, list) {
+    medium_algorythm_2(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 5, 450, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(4, 5, 450, this.get_car(), player));
 
         if (this.line == 2) {
-            new_cars.push(new Cars(4, 0, 300, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 1, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 2, 450, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 2, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 3, 350, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 4, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 4, 200, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 0, 300, this.get_car(), player));
+            new_cars.push(new Cars(4, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 2, 450, this.get_car(), player));
+            new_cars.push(new Cars(4, 2, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 3, 350, this.get_car(), player));
+            new_cars.push(new Cars(4, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 4, 200, this.get_car(), player));
         }
         else if (this.line == 5) {
-            new_cars.push(new Cars(4, 5, 300, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 4, 0, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 3, 450, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 3, 0, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 2, 350, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 1, 0, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 1, 200, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 5, 300, this.get_car(), player));
+            new_cars.push(new Cars(4, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 3, 450, this.get_car(), player));
+            new_cars.push(new Cars(4, 3, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 2, 350, this.get_car(), player));
+            new_cars.push(new Cars(4, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 1, 200, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_3(player, list) {
+    medium_algorythm_3(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 5, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 2, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(4, 3, 50, "/static/images/cars/blue_car.png"));
+        new_cars.push(new Cars(4, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(4, 5, 450, this.get_car(), player));
+        new_cars.push(new Cars(4, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(4, 3, 50, this.get_car(), player));
 
         if (this.line == 3) {
-            new_cars.push(new Cars(4, 1, 200, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 5, 0, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 4, 350, "/static/images/cars/yellow_car.png"));
-            new_cars.push(new Cars(4, 3, 400, "/static/images/cars/yellow_car.png"));
+            new_cars.push(new Cars(4, 1, 200, this.get_car(), player));
+            new_cars.push(new Cars(4, 5, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 4, 350, this.get_car(), player));
+            new_cars.push(new Cars(4, 3, 400, this.get_car(), player));
 
         }
         else if (this.line == 4) {
-            new_cars.push(new Cars(4, 4, 200, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 0, 0, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 1, 350, "/static/images/cars/red_car.png"));
-            new_cars.push(new Cars(4, 2, 400, "/static/images/cars/red_car.png"));
+            new_cars.push(new Cars(4, 4, 200, this.get_car(), player));
+            new_cars.push(new Cars(4, 0, 0, this.get_car(), player));
+            new_cars.push(new Cars(4, 1, 350, this.get_car(), player));
+            new_cars.push(new Cars(4, 2, 400, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars);
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_1(player, list) {
+    hard_algorythm_1(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 250, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 350, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 150, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 250, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 350, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 150, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_2(player, list) {
+    hard_algorythm_2(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 0, 350, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 100, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 250, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 480, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 430, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 0, 350, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 100, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 250, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 480, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 430, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_3(player, list) {
+    hard_algorythm_3(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 380, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 150, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 200, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 200, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 400, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 380, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 450, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 150, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 200, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 400, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_4(player, list) {
+    hard_algorythm_4(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 0, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 200, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 250, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 250, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 50, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 250, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 250, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 50, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_5(player, list) {
+    hard_algorythm_5(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 500, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 150, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 200, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 250, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 150, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 450, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 500, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 150, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 250, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 150, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 450, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_6(player, list) {
+    hard_algorythm_6(player, list, created_aditionals) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 0, 300, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 1, 500, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 2, 450, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 3, 0, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 4, 100, "/static/images/cars/blue_car.png"));
-        new_cars.push(new Cars(2.5, 5, 300, "/static/images/cars/blue_car.png"));
-        this.append_and_subscribe(player, list, new_cars);
+        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 1, 500, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 2, 450, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 4, 100, this.get_car(), player));
+        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
+        this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    
-    append_and_subscribe(player, list, new_cars) {
+    get_car() {
+        var cars = ["blue", "green", "purple", "red", "yellow"]
+        return "/static/images/cars/" + cars[Math.floor(Math.random() * (5))] + "_car.png";
+    }
+
+
+    append_and_subscribe(player, list, new_cars, created_aditionals) {
+        this.generate_additionals(new_cars, player, created_aditionals);
         for (let i = 0; i < new_cars.length; i++) {
-            new_cars[i].subscribe(player);
             new_cars[i].move_back();
             list.push(new_cars[i]);
         }
-        this.generate_additionals(new_cars);
     }
 
-    generate_additionals(new_cars) {
-        var index = 0, was_added=false,was_moved=false;
-        var added_count = Math.floor(Math.random() * (5) + 1), count = 0, step = 50;
-        while (count != added_count) {
+    create_additionals(random_line, y_pos, player, new_additionals) {
+        var make_power_up = Math.floor(Math.random() * (6))
+        if (make_power_up < 5) {
+            var new_object = new Additionals(2.5, random_line, y_pos, "boost", player);
+        } else {
+            var new_object = new Additionals(2.5, random_line, y_pos, "coin", player);
+        }
+        new_additionals.push(new_object);
+        return new_additionals;
+    }
+
+    generate_additionals(new_cars, player,created_aditionals) {
+        var was_added = false, was_moved = false, can_be_added = true;
+        var added_count = Math.floor(Math.random() * (5) + 1), step = 50;
+        var new_additionals = []
+        for (let random_number = 0; random_number < added_count; random_number++) {
             var random_line = Math.floor(Math.random() * (5));
-            var y_pos = 0;
+            var y_pos = 100;
             var skip_y_positions = []
             for (let i = 0; i < new_cars.length; i++) {
                 var new_car = new_cars[i];
@@ -243,34 +259,61 @@ class Levels {
             while (was_added == false) {
                 if (skip_y_positions.length > 0) {
                     for (let a = 0; a < skip_y_positions.length; a++) {
-                        if (y_pos + 2*step < skip_y_positions[index].position.y + canvas.clientHeight || y_pos > skip_y_positions[index].position.y + skip_y_positions[index].position.height + canvas.clientHeight + step) {
-                            let coin = new Additionals(2.5, random_line, y_pos, "/static/images/cars/blue_car.png");
-                            coin.move_back();
-                            count++;
-                            was_added = true;
-                        }else if(y_pos + 2* step >= skip_y_positions[index].position.y + canvas.clientHeight){
-                            y_pos += skip_y_positions[index].position.height + canvas.clientHeight
+                        if (((y_pos + step >= skip_y_positions[a].position.y + canvas.clientHeight) && (y_pos <= skip_y_positions[a].position.y + canvas.clientHeight)) ||
+                            ((y_pos - (step / 2) <= skip_y_positions[a].position.y + canvas.clientHeight + skip_y_positions[a].position.height) && (y_pos + step >= skip_y_positions[a].position.y + skip_y_positions[a].position.height + canvas.clientHeight))
+                            || ((y_pos >= skip_y_positions[a].position.y + canvas.clientHeight) && (y_pos + step <= skip_y_positions[a].position.y + skip_y_positions[a].position.height + canvas.clientHeight))) {
+                            y_pos += 25;
+                            can_be_added = false;
                             was_moved = true;
+                            break;
                         }
                     }
-                    if(was_moved == true){
+
+                    if (new_additionals.length > 0 && was_moved == false) {
+                        for (let c = 0; c < new_additionals.length; c++) {
+                            if (((y_pos + 2 * step > new_additionals[c].position.y + canvas.clientHeight) && (y_pos < new_additionals[c].position.y + canvas.clientHeight)) || ((y_pos < new_additionals[c].position.y + canvas.clientHeight + 2 * step) && (y_pos > new_additionals[c].position.y + canvas.clientHeight))) {
+                                can_be_added = false;
+                                was_moved = true;
+                                y_pos += step;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (was_moved == true) {
+                        if (y_pos > canvas.clientHeight - 150) {
+                            break;
+                        }
+                        was_moved = false;
+                        can_be_added = true;
+                        continue;
+                    } else if (can_be_added == true && was_moved == false) {
+                        this.create_additionals(random_line, y_pos, player, new_additionals);
+                        was_added = true;
+                    } else {
                         y_pos += 25;
                         was_moved = false;
+                        can_be_added = true;
                     }
+
+                    if (y_pos > canvas.clientHeight - 150) {
+                        break;
+                    }
+
                 }
-                else{
-                    y_pos = Math.floor(Math.random() * (canvas.clientHeight));
-                    let coin = new Additionals(2.5, random_line, y_pos, "/static/images/cars/blue_car.png");
-                    coin.move_back();
-                    count++;
-                    break
+                else if (skip_y_positions.length == 0) {
+                    this.create_additionals(random_line, y_pos, player, new_additionals);
+                    was_added = true;
                 }
             }
             was_added = false;
             skip_y_positions = [];
-            index = 0;
         }
-
+        // if (new_additionals.length > 0) {            
+            // for (let a = 0; a < new_additionals.length; a++) {
+            //     created_aditionals.push(new_additionals[a]);
+            // }
+        // }
     }
 
     draw_finish_line(size, x, y, lines) {
@@ -303,12 +346,16 @@ class Levels {
         this.y_pos = 0;
 
         this.animateFrame = () => {
-            ctx.clearRect(0, this.y_pos - this.size, canvas.clientWidth, lines * this.size)
-            this.draw_finish_line(this.size, x_pos, this.y_pos, lines);
-            this.check_collision(player);
-            setTimeout(this.animateFrame, 50);
-            this.y_pos += this.size;
-            this.bottom = this.y_pos + (lines * this.size);
+            if (this.animate) {                
+                ctx.clearRect(0, this.y_pos - this.size, canvas.clientWidth, lines * this.size)
+                this.draw_finish_line(this.size, x_pos, this.y_pos, lines);
+                this.check_collision(player);
+                setTimeout(this.animateFrame, 50);
+                this.y_pos += this.size;
+                this.bottom = this.y_pos + (lines * this.size);
+            }else if (game_run() == false) {
+                setTimeout(this.animateFrame, 5);
+            }
         }
         this.animateFrame();
     }
@@ -317,23 +364,17 @@ class Levels {
         if (this.bottom >= player.position.y) {
             cancelAnimationFrame(this.animateFrame);
             this.animateFrame = null;
+            ctx.clearRect(0,0,canvas.clientWidth, canvas.clientHeight);
             stop_animation("win")
         }
     }
 }
 
-//Vytvorit novu classu  --> Akoze funcguje to aleeeee treba fixnut mazanie z listo a unsubscribe observera
-    //coiny
-    //powerup
-//Optimalizacia
-//Vyriesit kolizie
-//Aj trackovanie hodnot
-
-//Zmena casovania
+//Zmena casovania -> Asi solved?!
 //skiny
-//rewards
-
 //positioning
-//Lockovanie levlov
-//Controller canvas tlacidiel
-//pause
+//rychlost objektov v draw_levels
+//zvuky
+//spravit help
+//refactor
+//Orvbseer checknut

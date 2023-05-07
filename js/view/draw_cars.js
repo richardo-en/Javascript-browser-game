@@ -2,8 +2,8 @@ var canvas = document.getElementById("main_canvas");
 var ctx = canvas.getContext("2d");
 
 class Cars extends Observer {
-    constructor(speed, lane, pos_y, src) {
-        super();
+    constructor(speed, lane, pos_y, src, player) {
+        super(player);
         this.speed = speed;
         this.name = "car";
         this.image = new Image();
@@ -22,7 +22,6 @@ class Cars extends Observer {
             this.position.width = this.image.width;
             this.position.height = this.image.height;
             this.draw_object();
-            this.cars.push(this);
         };
         this.animateFrame = null;
         this.animate = true;
@@ -30,83 +29,32 @@ class Cars extends Observer {
 
     draw_object() {
         this.set_positions();
-        ctx.clearRect(this.position.x-5, this.position.y - 5, this.position.width + 10, this.position.height + 5);
+        ctx.clearRect(this.position.x - 5, this.position.y - 5, this.position.width + 10, this.position.height + 5);
         ctx.drawImage(this.image, this.position.x, this.position.y, this.position.width, this.position.height);
     }
 
     move_back() {
         this.animateFrame = () => {
-            if (this.animate && this.position.y - this.position.height < canvas.height) {
+            if (this.animate && this.position.y < canvas.clientHeight) {
                 this.position.y += this.speed;
-                this.notify(this.cars);
+                if (this.observer.calculate_line() - 1 == this.lane && (this.observer.position.y + 50 < this.position.y + this.position.height || this.observer.position.y + this.observer.position.height + 50 > this.position.y)) {
+                    this.notify(this);
+                }
                 this.draw_object();
                 setTimeout(this.animateFrame, 5);
-            } else {
-                let i = 0;
-                while (i < this.cars.length) {
-                    if (this.cars[i] === this) {
-                        this.cars.splice(i, 1);
-                        break;
-                    }
-                    i++;
-                }
+            }else if(game_run() == false) {
+                setTimeout(this.animateFrame, 5);
+            }else{
+                unsubscribe(this, "car");
             }
         }
 
-        this.animateFrame();
-    }
-
-    move_back_right() {
-        if (this.new_x_pos == null) {
-            if (this.position.x == 0) {
-                this.set_positions();
-            }
-            this.new_x_pos = this.position.x + (1000 / 6);
-        }
-        this.animateFrame = () => {
-            if (this.position.y < canvas.height) {
-                this.position.y += this.speed;
-                if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
-                    this.position.x += this.speed;
-                }
-                this.draw_object();
-                if (this.animate == true) {
-                    setTimeout(this.animateFrame, 10);
-                }
-            } else {
-                this.new_x_pos = null;
-            }
-        }
-        this.animateFrame();
-    }
-
-    move_back_left() {
-        if (this.new_x_pos == null) {
-            this.new_x_pos = this.position.x + (1000 / 6);
-        }
-        this.animateFrame = () => {
-            if (this.position.y - this.position.height < canvas.height) {
-                this.position.y += this.speed;
-                if (this.new_x_pos > this.position.x && this.position.y > canvas.height / 8) {
-                    this.position.x -= this.speed;
-                }
-                this.draw_object();
-                setTimeout(this.animateFrame, 10);
-            } else {
-                this.new_x_pos = null;
-            }
-        }
         this.animateFrame();
     }
 
     set_positions() {
         let offset = ((1000 / 6) - this.position.width) / 2;
         this.position.x = (1000 / 6) * this.lane + offset;
-    }
-
-    stop_animation() {
-        cancelAnimationFrame(this.animationFrameId);
-        this.animationFrameId = null;
     }
 
 }

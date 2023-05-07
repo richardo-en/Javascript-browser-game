@@ -54,6 +54,15 @@ class Button extends Button_parent{
         new_button.addEventListener("click" , this.function_to_execute);
     }
 
+    draw_coin_button(){
+        let new_button = document.createElement("button");
+        let section = this.check_section();
+        new_button.innerHTML = get_from_cookies("coin");
+        new_button.id = "coin"
+        new_button.className = "lvl_button";
+        section.appendChild(this.set_element_position(new_button, this.positon_top, this.position_left));
+    }
+
     draw_image(image_source){
         var section = this.check_section();
         var image = document.createElement("img");

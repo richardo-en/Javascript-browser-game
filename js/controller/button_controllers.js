@@ -1,6 +1,3 @@
-var keys
-
-
 function start_music() {
     audio = document.getElementById("my_audio");
     // audio.play();
@@ -92,31 +89,8 @@ function check_for_existing_elements(identifier) {
     return false
 };
 
-// function start_game() {
-//     remove_all_elements();
-//     document.getElementById("background_image").style.animationDuration = "2s";
-//     player = new Player("/static/images/cars/police/german_police_car.png");
-
-//     function runLevels() {
-//         let line = player.calculate_line();
-//         if (stop == false) {
-//             if (line == 1 || line == 6) {
-//                 new Levels(line).easy_algorythm_1(player, created_cars);
-//             } else if (line == 2 || line == 5) {
-//                 new Levels(line).easy_algorythm_2(player, created_cars);
-//             } else {
-//                 new Levels(line).easy_algorythm_3(player, created_cars);
-//             }
-//             setTimeout(runLevels, 2000);
-//         }
-//     }
-
-//     runLevels();
-// };
-
 document.addEventListener("keydown", (event) => {
-    var stop = get_stop_value();
-    if (stop == false) {
+    if (game_run()) {
         if (event.key.toUpperCase() === document.getElementById("movement_right").value) {
             player.start_move_right();
         }
@@ -127,8 +101,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
-    var stop = get_stop_value();
-    if (stop == false) {
+    if (game_run()) {
         if (event.key.toUpperCase() === document.getElementById("movement_right").value) {
             player.stop_move_right();
             player.reset_rotation();
@@ -139,6 +112,13 @@ document.addEventListener("keyup", (event) => {
         }
     }
 });
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'p' && game_run()) {
+      stop_all_elements();
+      draw_game_screen("break");
+    }
+  });
 
 function check_for_rewards(event) {
     var element_id = event.target.id;
@@ -151,7 +131,8 @@ function check_for_rewards(event) {
         if (element_id === ids[i]) {
             if (quests[i].current_status >= quests[i].reward_goal) {
                 box.textContent = 'Coins were added!';
-                box.style.background = "green"
+                box.style.background = "green";
+                increase_coins(quests[i].reward);
                 increase_reward(i)
             } else {
                 box.textContent = 'Coins weren\'t added! Your current count for task number ';
@@ -171,6 +152,12 @@ function check_for_rewards(event) {
 }
 
 function start_game_controller(event) {
-    var level_id = event.target.textContent;
-    start_game(level_id);
+    var unlocked_levels = JSON.parse(getCookie("levels"));
+    var curr_level = parseInt(unlocked_levels[0].current_level,10)
+    var level_id =  parseInt(event.target.textContent);
+    if (curr_level >= level_id) {
+        load_levels(level_id);
+    }else{
+        load_levels(0);
+    }
 }

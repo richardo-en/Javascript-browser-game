@@ -18,18 +18,55 @@ var quests = [
 
 var basic_settings = ['A', 'D', 50];
 var coin = 10;
-var levels = [{
-  "unlocked_level": 1,
-  "current_level": 1
-}];
+var levels = [{  "unlocked_level": 1,  "current_level": 1}];
 
-if (!checkCookieExistence()) {
+function load_levels(index) {
+  var unlocked_levels = JSON.parse(getCookie("levels"));
+  var level_buttons = document.getElementsByClassName("lvl_button");
+  var curr_level = parseInt(unlocked_levels[0].current_level,10)
+  for (let i = 0; i < level_buttons.length; i++) {
+    if (level_buttons[i].id != "coin") {
+      if (curr_level >= parseInt(level_buttons[i].textContent, 10)) {
+        level_buttons[i].className = "lvl_button unlocked";
+        level_buttons[i].removeAttribute("id");
+        if (i == index-1) {
+          level_buttons[i].className = "lvl_button";
+          level_buttons[i].id = "selected";
+        }
+      } else {
+        level_buttons[i].className = "lvl_button locked";
+        level_buttons[i].removeAttribute("id");
+      }
+    }
+  }
+}
+
+function upload_to_cookie_simple_form(name, object){
   var expiration_date = new Date();
   expiration_date.setFullYear(expiration_date.getFullYear() + 1);
-  document.cookie = "quests=" + JSON.stringify(quests) + "; expires=" + expiration_date.toUTCString() + "; path=/";
-  document.cookie = "basic_settings=" + JSON.stringify(basic_settings) + "; expires=" + expiration_date.toUTCString() + "; path=/";
-  document.cookie = "coin=" + coin + "; expires=" + expiration_date.toUTCString() + "; path=/";
-  document.cookie = "levels=" + JSON.stringify(levels) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  document.cookie = name + "=" + JSON.stringify(object) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+
+}
+
+function checkAndSaveCookies() {
+  var expiration_date = new Date();
+  expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+
+  if (!getCookie('quests')) {
+    document.cookie = "quests=" + JSON.stringify(quests) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
+
+  if (!getCookie('basic_settings')) {
+    document.cookie = "basic_settings=" + JSON.stringify(basic_settings) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
+
+  if (!getCookie('coin')) {
+    document.cookie = "coin=" + coin + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
+
+  if (!getCookie('levels')) {
+    document.cookie = "levels=" + JSON.stringify(levels) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
 }
 
 function getCookie(name) {
@@ -48,7 +85,7 @@ function upload_to_cokiee(name, object) {
 
 
 function load_setting_vlues() {
-  var parsed_data = JSON.parse(getCookie('basic_settings'));;
+  var parsed_data = JSON.parse(getCookie('basic_settings'));
 
   document.getElementById("movement_left").value = parsed_data[0];
   let mute_button = document.getElementById("button_container");
@@ -96,21 +133,31 @@ function increase_reward(index) {
   set_rewards_text();
 }
 
-function checkCookieExistence() {
-  var cookies = document.cookie.split(";");
-  for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i].trim();
-    if (cookie.startsWith("basic_settings=")) {
-      return true;
-    }
-  }
-  return false;
-}
-
 function increase_status(index) {
   var quests = JSON.parse(getCookie('quests'));
   quests[index].current_status++;
   upload_to_cokiee("quests", quests);
   var quests = JSON.parse(getCookie('quests'));
-  console.log(quests[0].current_status);
 }
+
+function get_from_cookies(type) {
+  let searched_value = type + "="
+  var cookieArray = document.cookie.split("; ");
+  for (var i = 0; i < cookieArray.length; i++) {
+    var cookie = cookieArray[i];
+
+    if (cookie.indexOf(searched_value) == 0) {
+      return cookie.substring(searched_value.length, cookie.length);
+    }
+  }
+  return null
+}
+
+function increase_coins(amount){
+  var coin = parseInt(get_from_cookies("coin"), 10);
+  coin += amount;
+  document.getElementById("coin").textContent = coin;
+  upload_to_cookie_simple_form("coin" , coin);
+}
+
+checkAndSaveCookies();

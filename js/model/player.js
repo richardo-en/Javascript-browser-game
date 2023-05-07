@@ -51,78 +51,71 @@ class Player {
         this.position_to_remove.width = new_positions_clear[4][2];
         this.position_to_remove.height = new_positions_clear[4][3];
 
-        ctx.fillStyle = "red";
+        // ctx.fillStyle = "red";
         // ctx.fillRect(new_positions_clear[4][0],  new_positions_clear[4][1] ,5,5);
         // ctx.fillRect(new_positions_clear[4][2], new_positions_clear[4][3] ,5,5);
     }
 
-    check_collision(cars) {
-
+    check_collision(car) {
         var new_positions_clear = calculate_new_positions([this.position.x, this.position.y, this.position.width, this.position.height, this.rotation]);
         this.position_to_remove.x_begin = new_positions_clear[4][0];
         this.position_to_remove.y_begin = new_positions_clear[4][1];
         this.position_to_remove.width = new_positions_clear[4][2];
         this.position_to_remove.height = new_positions_clear[4][3];
 
-        this.rotated_position.top_left = new_positions_clear[0]
-        this.rotated_position.top_right = new_positions_clear[1]
-        this.rotated_position.bottom_left = new_positions_clear[2]
-        this.rotated_position.bottom_right = new_positions_clear[3]
+        this.rotated_position.top_left = new_positions_clear[0];
+        this.rotated_position.top_right = new_positions_clear[1];
+        this.rotated_position.bottom_left = new_positions_clear[2];
+        this.rotated_position.bottom_right = new_positions_clear[3];
+
         var collision_points = [], is_from_left = false, is_from_right = false, is_from_above = false, is_from_under = false, temporary_lowest_y = null, index;
         var lowest_y = Number.MAX_VALUE;
-        for (let i = 0; i < cars.length; i++) {
-            var car = cars[i];
-            //Check for Y positions
-            // ctx.fillRect(this.position_to_remove.x_begin + this.position_to_remove.width, this.position.y ,5,5)
-            if (car.position.x + car.position.width > this.position_to_remove.x_begin && car.position.x + car.position.width < this.position_to_remove.x_begin + this.position_to_remove.width) {
-                collision_points = this.calculate_collision_points(this.rotated_position.top_left[0], this.rotated_position.top_left[1], this.rotated_position.bottom_left[0], this.rotated_position.bottom_left[1]);
-                is_from_left = true;
-            } else if ((car.position.x < this.position_to_remove.x_begin + this.position_to_remove.width) && (car.position.x > this.position_to_remove.x_begin)) {
-                collision_points = this.calculate_collision_points(this.rotated_position.top_right[0], this.rotated_position.top_right[1], this.rotated_position.bottom_right[0], this.rotated_position.bottom_right[1]);
-                is_from_right = true;
-            }
-            if (car.position.y > this.position_to_remove.y_begin && car.position.y < this.position_to_remove.y_begin + this.position_to_remove.height) {
-                is_from_under = true;
-            } else if (car.position.y + car.position.height > this.position_to_remove.y_begin && car.position.y + car.position.height < this.position_to_remove.y_begin + this.position_to_remove.height) {
-                is_from_above = true;
-            }
-            if ((is_from_left == true || is_from_right == true) && (is_from_under == true || is_from_above == true)) {
-                for (let a = 0; a < collision_points[0].length; a++) {
-                    if (is_from_under == true) {
-                        temporary_lowest_y = collision_points[1][a] - car.position.y;
-                    } else {
-                        temporary_lowest_y = collision_points[1][a] - car.position.y + car.position.height;
-                    }
 
+        if (car.position.x + car.position.width > this.position_to_remove.x_begin && car.position.x + car.position.width < this.position_to_remove.x_begin + this.position_to_remove.width) {
+            collision_points = this.calculate_collision_points(this.rotated_position.top_left[0], this.rotated_position.top_left[1], this.rotated_position.bottom_left[0], this.rotated_position.bottom_left[1]);
+            is_from_left = true;
+        } else if ((car.position.x < this.position_to_remove.x_begin + this.position_to_remove.width) && (car.position.x > this.position_to_remove.x_begin)) {
+            collision_points = this.calculate_collision_points(this.rotated_position.top_right[0], this.rotated_position.top_right[1], this.rotated_position.bottom_right[0], this.rotated_position.bottom_right[1]);
+            is_from_right = true;
+        }
 
-                    if (temporary_lowest_y < 0) {
-                        temporary_lowest_y *= (-1);
-                    }
+        if (car.position.y > this.position_to_remove.y_begin && car.position.y < this.position_to_remove.y_begin + this.position_to_remove.height) {
+            is_from_under = true;
+        } else if (car.position.y + car.position.height > this.position_to_remove.y_begin && car.position.y + car.position.height < this.position_to_remove.y_begin + this.position_to_remove.height) {
+            is_from_above = true;
+        }
 
-                    if (temporary_lowest_y == null) {
-                        lowest_y = temporary_lowest_y;
-                    } else if (temporary_lowest_y < lowest_y) {
-                        lowest_y = temporary_lowest_y;
-                        index = a;
-                    }
+        if ((is_from_left == true || is_from_right == true) && (is_from_under == true || is_from_above == true)) {
+            for (let a = 0; a < collision_points[0].length; a++) {
+                if (is_from_under == true) {
+                    temporary_lowest_y = collision_points[1][a] - car.position.y;
+                } else {
+                    temporary_lowest_y = collision_points[1][a] - car.position.y + car.position.height;
                 }
-                for (let c = 0; c < collision_points[0].length; c++) {
-                    ctx.fillRect(collision_points[0][c], collision_points[1][c], 5, 5);
+
+
+                if (temporary_lowest_y < 0) {
+                    temporary_lowest_y *= (-1);
                 }
-                if (is_from_left == true) {
-                    if (car.position.x + car.position.width - 5> collision_points[0][index]) {
-                        return true
-                    }
-                } else if (is_from_right == true) {
-                    if (car.position.x + 5 < collision_points[0][index]) {
-                        return true
-                    }
-                };
-                index = null;
-                lowest_y = null;
-                collision_points = [];
+
+                if (temporary_lowest_y == null) {
+                    lowest_y = temporary_lowest_y;
+                } else if (temporary_lowest_y < lowest_y) {
+                    lowest_y = temporary_lowest_y;
+                    index = a;
+                }
             }
-            is_from_left = false, is_from_right = false, is_from_above = false, is_from_under = false
+
+            if (is_from_left == true) {
+                if (car.position.x + car.position.width - 5 > collision_points[0][index]) {
+                    return true
+                }
+            } else if (is_from_right == true) {
+                if (car.position.x + 5 < collision_points[0][index]) {
+                    return true
+                }
+            };
+            collision_points = [];
         }
     }
 
@@ -150,10 +143,18 @@ class Player {
         return [collision_points_x, collision_points_y]
     }
 
-    update(cars) {
-        if (this.check_collision(cars)) {
-            stop_animation("lose");
-            increase_status(0);
+    update(object) {
+        if (this.check_collision(object)) {
+            if ( object.name == "car") {
+                stop_animation("lose");
+                increase_status(0);
+            }else if(object.name == "coin"){
+                increase_coins(1);
+                object.delete_object();
+            }else if(object.name == "boost"){
+                power_up();
+                object.delete_object();
+            }
         }
     }
 

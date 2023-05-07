@@ -29,6 +29,8 @@ class Section {
             new Button(80, 15, identifier, start_game_controller).draw_level_button('1');
             new Button(80, 21, identifier, start_game_controller).draw_level_button('2');
             new Button(80, 27, identifier, start_game_controller).draw_level_button('3');
+            new Button(5, 100, identifier, start_game_controller).draw_coin_button();
+            load_levels(1)
         };
     }
     
@@ -58,9 +60,5 @@ class Section {
             new Button(50, 50, identifier, set_volume).draw_volume_slider("volume_bar");
         };
         load_setting_vlues();
-    }
-    
-    test() {
-        alert("Test");
     }
 }
