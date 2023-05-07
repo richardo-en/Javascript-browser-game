@@ -113,9 +113,9 @@ class Button extends Button_parent{
     draw_input_skin_button(button_identifier){ 
         var section = this.check_section();
         var skin_button = document.createElement("button");
-        skin_button.id = button_identifier;
         skin_button.className = "skin_button";
-        //input_button.addEventListener("input", this.function_to_execute)
+        skin_button.classList.add(button_identifier);
+        skin_button.addEventListener("click" , this.function_to_execute);
         section.appendChild(this.set_element_position(skin_button, this.positon_top, this.position_left));
     }
 

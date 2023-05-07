@@ -1,6 +1,3 @@
-var canvas = document.getElementById("main_canvas");
-var ctx = canvas.getContext("2d");
-
 function calculate_new_positions(array) {
     var prev_width = array[2], prev_height = array[3], rotation = array[4] * Math.PI / 180, temporary_positions = [], positions_for_remove = [];
     var new_postions = [], middle_point_x = array[0] + (prev_width/2) , middle_point_y = array[1] + (prev_height/2);
@@ -50,7 +47,7 @@ function check_section(section_id) {
     if (!section) {
         section = document.createElement("section");
         section.id = section_id;
-        canvas.parentNode.insertBefore(section, canvas.nextSibling);
+        document.getElementById("main_canvas").parentNode.insertBefore(section, canvas.nextSibling);
     }
     return section;
 }
@@ -63,19 +60,33 @@ function draw_image(positon_top, position_left, section_identifier, image_path, 
     section.appendChild(this.draw_element_position(image, positon_top, position_left));
 }
 
-// document.addEventListener('keydown', (event) => {
-//     if (event.key === "l") {
-//         draw_game_screen("lose");
-//     }else if (event.key === "w"){
-//         draw_game_screen("win");
-//     }else if (event.key === "p"){
-//         draw_game_screen("break");
-//     }
-// }, false);
-
-
-new Section().create_skins();
-new Section().create_rewards();
-new Section().create_setting();
-new Section().create_main_page();
-start_music();
+window.onload = function() {
+    var scripts = [
+      "/data/data.js",
+      "/js/observer/observer.js",
+      "/js/model/level_rewards.js",
+      "/js/view/additionals.js",
+      "/js/view/draw_cars.js",
+      "/js/view/draw_levels.js",
+      "/js/view/draw_canvas_screens.js",
+      "/js/view/buttons.js",
+      "/js/view/sections.js",
+      "/js/controller/button_controllers.js",
+      "/js/controller/canvas_buttons.js",
+      "/js/model/run_game.js",
+      "/js/model/player.js"
+    ];
+  
+    scripts.forEach(function(script) {
+      var scriptElement = document.createElement("script");
+      scriptElement.src = script;
+      document.head.appendChild(scriptElement);
+    });
+    setTimeout(function(){
+        new Section().create_skins();
+        new Section().create_rewards();
+        new Section().create_setting();
+        new Section().create_main_page();
+        start_music();
+    }, 100)
+}

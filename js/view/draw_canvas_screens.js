@@ -135,28 +135,36 @@ class Canvas_screens extends Canvas_parent {
         canvas.className = "help_screen";
         let x_position = 100;
         let y_position = 100;
-        let image_list = [new Image(), new Image(), new Image(), new Image()];
+        let image_list = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 
-        image_list[0].src = "/static/images/movement_left_settings.png"
-        image_list[1].src = "/static/images/movement_right_settings.png"
-        image_list[2].src = "/static/images/Keyboard_left.png"
-        image_list[3].src = "/static/images/Keyboard_right.png"
+        image_list[0].src = "/static/images/movement_left_settings.png";
+        image_list[1].src = "/static/images/movement_right_settings.png";
+        image_list[2].src = "/static/images/pause_screen_image.png";
+        image_list[3].src = "/static/images/Keyboard_left.png";
+        image_list[4].src = "/static/images/Keyboard_right.png";
+        image_list[5].src = "/static/images/pause_key.png";
 
-        image_list[3].addEventListener("load" , () => {
+        image_list[5].addEventListener("load" , () => {
             this.clear_screen()
             this.ctx.beginPath();
             this.ctx.roundRect(20, 20, canvas.width - 40, canvas.height - 40 , [25]);
             this.ctx.fillStyle = "#596a85";
             this.ctx.fill();
             this.draw_button_with_custom_positions("Back to main menu", (canvas.width/2) - 120, canvas.height - 100, 240, 45);
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 3; i++) {
                 ctx.drawImage(image_list[i] , x_position , y_position, image_list[i].width, image_list[i].height);
-                ctx.drawImage(image_list[i+2] , x_position + 50 + image_list[i].width , y_position , image_list[i].height , image_list[i].height);
+                ctx.drawImage(image_list[i+3] , x_position + 50 + image_list[i].width , y_position , image_list[i].height , image_list[i].height);
                 y_position += image_list[i].height + 20;
             }
             this.ctx.closePath();
             
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText("In this game you have to dodge cars for predifined time.", 500, 400);
+            ctx.fillText("You can complete missions, collect coins, collect skins and compete in leader board", 500, 420);
+            ctx.fillText("You can use only 3 controllers and set these controlles as you wish. Have fun :)", 500, 450);
         })
+
     }
 
     get_type() {

@@ -42,10 +42,10 @@ class Cars extends Observer {
                 }
                 this.draw_object();
                 setTimeout(this.animateFrame, 5);
-            }else if(game_run() == false) {
-                setTimeout(this.animateFrame, 5);
-            }else{
+            }else if(this.position.y > canvas.clientHeighta){
                 unsubscribe(this, "car");
+            }else if(game_run() == false && this.animate == false) {
+                setTimeout(this.animateFrame, 5);
             }
         }
 

@@ -16,6 +16,28 @@ var quests = [
   }
 ]
 
+var skins = [{
+  "link" : ["german_police_car.png"],
+  "unlocked" : true,
+  "cost" : 0
+},
+{
+  "link" : ["police_car.png"],
+  "unlocked" : false,
+  "cost" : 50
+},
+{
+  "link" : ["police_car_black.png"],
+  "unlocked" : false,
+  "cost" : 100
+},
+{
+  "link" : ["police-car-siren-blue.png" , "police-car-siren-red.png"],
+  "unlocked" : false,
+  "cost" : 100
+}
+]
+
 var basic_settings = ['A', 'D', 50];
 var coin = 10;
 var levels = [{  "unlocked_level": 1,  "current_level": 1}];
@@ -66,6 +88,25 @@ function checkAndSaveCookies() {
 
   if (!getCookie('levels')) {
     document.cookie = "levels=" + JSON.stringify(levels) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
+
+  if (!getCookie('skins')) {
+    document.cookie = "skins=" + JSON.stringify(skins) + "; expires=" + expiration_date.toUTCString() + "; path=/";
+  }
+}
+
+function load_skins(index){
+  var buttons = document.getElementsByClassName("skin_button");
+  var parsed_data = JSON.parse(getCookie('skins'));
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.add("unlocked");
+    buttons[i].removeAttribute("id");
+    if (parsed_data[i].unlocked == false) {
+      buttons[i].textContent = parsed_data[i].cost + " C"
+    }
+    if (i == index) {
+      buttons[i].id = "selected_skin"
+    }
   }
 }
 

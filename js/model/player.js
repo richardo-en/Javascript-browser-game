@@ -38,6 +38,10 @@ class Player {
         ]
     }
 
+    change_image(link){
+        this.image.src = link
+    }
+
     draw_player_to_canvas() {
         ctx.clearRect(this.position_to_remove.x_begin, this.position_to_remove.y_begin, this.position_to_remove.width, this.position_to_remove.height);
         ctx.save();

@@ -7,6 +7,25 @@ function start_music() {
     });
 }
 
+function check_skin(event) {
+    var price = parseInt(event.target.textContent);
+    let buttons = document.querySelectorAll(".skin_button");
+    var index = Array.prototype.indexOf.call(buttons, event.target);
+    if (price) {
+        var current_amount = getCookie("coin");
+        if (current_amount >= price) {
+            increase_coins(-price);
+            var skins = JSON.parse(getCookie('skins'));
+            skins[index].unlocked = true;
+            upload_to_cokiee("skins", skins);
+            buttons[index].textContent = "";
+            setTimeout(function () { load_skins(index); }, 0);;
+        }
+    } else {
+        load_skins(index);
+    }
+}
+
 function set_volume() {
     let mute_button = document.getElementById("button_container");
     let new_volume_value = document.getElementById("volume_bar").value / 100;
@@ -32,10 +51,10 @@ function save_settings_button() {
     set_settings_values();
     new Section().create_main_page();
 }
+
 function draw_help_screen() {
-    let background = get_object("background")
+    document.getElementById("background_image").style.animation = "none"
     remove_all_elements();
-    background.stopLoop();
     new Canvas_screens().clear_screen();
     new Canvas_screens().help_screen();
 };
@@ -113,12 +132,14 @@ document.addEventListener("keyup", (event) => {
     }
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'p' && game_run()) {
-      stop_all_elements();
-      draw_game_screen("break");
+        stop_all_elements();
+        setTimeout(function () {
+            draw_game_screen("break");
+        }, 100)
     }
-  });
+});
 
 function check_for_rewards(event) {
     var element_id = event.target.id;
@@ -153,11 +174,11 @@ function check_for_rewards(event) {
 
 function start_game_controller(event) {
     var unlocked_levels = JSON.parse(getCookie("levels"));
-    var curr_level = parseInt(unlocked_levels[0].current_level,10)
-    var level_id =  parseInt(event.target.textContent);
+    var curr_level = parseInt(unlocked_levels[0].current_level, 10)
+    var level_id = parseInt(event.target.textContent);
     if (curr_level >= level_id) {
         load_levels(level_id);
-    }else{
+    } else {
         load_levels(0);
     }
 }

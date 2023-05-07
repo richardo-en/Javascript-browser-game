@@ -1,58 +1,58 @@
 /* Basic elements */
 .btn {
-    position: absolute;
-    border-radius: 10px;
-    border: 3px solid black;
-    padding: 20px;
-    font-family: cursive;
-    font-weight: bold;
-    font-size: 20px;
-    min-width: 200px;
-    background-image: url("/static/images/button_background.jpg");
-    overflow: hidden;
-    background-size: 200px 100px;
-    color: black;
-    transition: all 0.5s;
+  position: absolute;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 20px;
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 20px;
+  min-width: 200px;
+  background-image: url("/static/images/button_background.jpg");
+  overflow: hidden;
+  background-size: 200px 100px;
+  color: black;
+  transition: all 0.5s;
 }
-.btn:hover{
-    background-size: 250px 150px;
+.btn:hover {
+  background-size: 250px 150px;
 }
 
-.lvl_button{
-    border-radius: 10px;
-    border: 3px solid black;
-    padding: 20px;
-    font-family: cursive;
-    font-weight: bold;
-    font-size: 20px;
-    /* max-width: 200px; */
-    background-image: url("/static/images/button_background.jpg");
-    overflow: hidden;
-    background-size: 200px 100px;
-    color: black;
-    transition: all 0.5s;
+.lvl_button {
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 20px;
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 20px;
+  /* max-width: 200px; */
+  background-image: url("/static/images/button_background.jpg");
+  overflow: hidden;
+  background-size: 200px 100px;
+  color: black;
+  transition: all 0.5s;
 }
-.lvl_button:hover{
-    background-size: 250px 150px;
+.lvl_button:hover {
+  background-size: 250px 150px;
 }
 
 /* SETTINGS VIEW */
 /* Volume button hover effect */
-#volume:hover{
-    transform: scale(1.1);
-    transition: all 0.5s ease;
+#volume:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease;
 }
 /* Input fields */
-.input_key{
-    width: 5vw;
-    height: 6vh;
-    color: black;
-    background-image: url("/static/images/button_background.jpg");
-    background-size: 200px 100px;
-    border: 2px solid #202020;
-    line-height: 6vh;
-    font-size: 40px;
-    text-align: center;
+.input_key {
+  width: 5vw;
+  height: 6vh;
+  color: black;
+  background-image: url("/static/images/button_background.jpg");
+  background-size: 200px 100px;
+  border: 2px solid #202020;
+  line-height: 6vh;
+  font-size: 40px;
+  text-align: center;
 }
 /* #input_key::-webkit-slider-thum{
     background-color: transparent;
@@ -61,87 +61,141 @@
     background-position: center center;
     background-repeat: no-repeat;
 }TESTING */
-.input_key:hover{
-    background-size: 250px 150px;
+.input_key:hover {
+  background-size: 250px 150px;
 }
 
 /* SKIN VIEW */
 /* Skin buttons */
-.skin_button{
-    width: 10vw;
-    height: 12vh;
-    border: 2px solid #202020;
-    transition: all 0.5s ease;
+.skin_button {
+  background-image: none;
+  background-size: contain, contain;
+  background-repeat: no-repeat;
+  background-size: 50% auto, auto 100%;
+  background-position: center;
+
+  position: absolute;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 20px;
+  font-family: cursive;
+  font-weight: bold;
+  font-size: 20px;
+  min-width: 200px;
+  background-position: center;
+  width: auto;
+  height: 200px;
+  transition: all 0.5s;
+  overflow: hidden;
+  color: black;
+  transition: all ease 0.5s;
 }
-.skin_button:hover{
-    transform: scale(1.1);
+.skin_button:hover {
+  transform: scale(1.1);
+  background-size: 50% auto, auto 120%;
+}
+.skin_1 {
+  background-image: url("/static/images/cars/police/german_police_car.png"),
+    url("/static/images/button_background.jpg");
+}
+
+.skin_2 {
+  background-image: url("/static/images/cars/police/police_car_black.png"),
+    url("/static/images/button_background.jpg");
+}
+
+.skin_3 {
+  background-image: url("/static/images/cars/police/police_car.png"),
+    url("/static/images/button_background.jpg");
+}
+
+.skin_4 {
+  background-image: url("/static/images/cars/police/police-car-siren-blue.png"),
+    url("/static/images/button_background.jpg");
+  animation: change_image 1s infinite;
+}
+
+@keyframes change_image {
+  0% {
+    background-image: url("/static/images/cars/police/police-car-siren-blue.png"),
+      url("/static/images/button_background.jpg");
+  }
+  50% {
+    background-image: url("/static/images/cars/police/police-car-siren-red.png"),
+      url("/static/images/button_background.jpg");
+  }
 }
 
 /* REWARD VIEWS */
-.reward_button{
-    width: 50vw;
-    height: 5vh;
-    border: 2px solid #202020;
-    border-radius: 3px;
-    font-size: larger;
+.reward_button {
+  width: 50vw;
+  height: 5vh;
+  border: 2px solid #202020;
+  border-radius: 3px;
+  font-size: larger;
 }
-.reward_button{
-    border: solid black 2px;
-    border-radius: 5px;
-    background: radial-gradient(#fff , #1289CB);
-    min-height: 20px;
-    transition: all 0.5s ease;
+.reward_button {
+  border: solid black 2px;
+  border-radius: 5px;
+  background: radial-gradient(#fff, #1289cb);
+  min-height: 20px;
+  transition: all 0.5s ease;
 }
-.reward_button:hover{
-    transform: scale(1.02);
-    background: radial-gradient(#d1d1d1 , #0f6999);
+.reward_button:hover {
+  transform: scale(1.02);
+  background: radial-gradient(#d1d1d1, #0f6999);
 }
 
-.message{
-    color: white;
-    position: fixed;
-    top: 20px;
-    left: auto;
-    width: 30vw;
-    padding: 10px;
-    text-align: center;
-    opacity: 1;
-    font-size: large;
-    border-radius: 10px;
-    transition: opacity 0.5s ease-out;
+.message {
+  color: white;
+  position: fixed;
+  top: 20px;
+  left: auto;
+  width: 30vw;
+  padding: 10px;
+  text-align: center;
+  opacity: 1;
+  font-size: large;
+  border-radius: 10px;
+  transition: opacity 0.5s ease-out;
 }
 
 @keyframes opacity_anim {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
   }
-
-#timer{
-    position: absolute;
-    right: 150px;
-    top: 800px;
-    color: black;
+  to {
+    opacity: 0;
+  }
 }
 
-#timer_text{
-    height: 100%;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 50px;
-    margin: 0;
+#timer {
+  position: absolute;
+  right: 150px;
+  top: 800px;
+  color: black;
 }
 
-#selected{
-    opacity: 100%;
+#timer_text {
+  height: 100%;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 50px;
+  margin: 0;
 }
-.unlocked{
-    opacity: 75%;
+
+#selected {
+  opacity: 100%;
 }
-.locked{
-    opacity: 50%;
-    pointer-events: none;
+
+#selected_skin {
+  opacity: 100%;
+}
+
+.unlocked {
+  opacity: 50%;
+}
+.locked {
+  opacity: 50%;
+  pointer-events: none;
 }

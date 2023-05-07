@@ -9,211 +9,224 @@ class Levels {
         this.size = 10;
         this.bottom;
         this.additionals = [];
+        this.speed;
     }
 
-    easy_algorythm_1(player, list, created_aditionals) {
+    easy_algorythm_1(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 180, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 180, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 180, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 180, this.get_car(), player));
 
         if (this.line == 1) {
-            new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 200, this.get_car(), player));
         }
         else if (this.line == 6) {
-            new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 200, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    easy_algorythm_2(player, list, created_aditionals) {
+    easy_algorythm_2(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 0, 450, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 450, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 450, this.get_car(), player));
 
         if (this.line == 2) {
-            new_cars.push(new Cars(2.5, 41, 200, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 2, 300, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 41, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 300, this.get_car(), player));
         }
         else if (this.line == 5) {
-            new_cars.push(new Cars(2.5, 1, 200, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 3, 300, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 300, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    easy_algorythm_3(player, list, created_aditionals) {
+    easy_algorythm_3(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
 
 
         if (this.line == 3) {
-            new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 4, 400, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 400, this.get_car(), player));
         }
         else if (this.line == 4) {
-            new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
-            new_cars.push(new Cars(2.5, 1, 400, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 400, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_1(player, list, created_aditionals) {
+    medium_algorythm_1(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 300, this.get_car(), player));
-        new_cars.push(new Cars(4, 2, 450, this.get_car(), player));
-        new_cars.push(new Cars(4, 3, 450, this.get_car(), player));
-        new_cars.push(new Cars(4, 5, 300, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
 
         if (this.line == 1) {
-            new_cars.push(new Cars(4, 1, 100, this.get_car(), player));
-            new_cars.push(new Cars(4, 3, 100, this.get_car(), player));
-            new_cars.push(new Cars(4, 5, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 100, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 100, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 5, 0, this.get_car(), player));
         }
         else if (this.line == 6) {
-            new_cars.push(new Cars(4, 4, 100, this.get_car(), player));
-            new_cars.push(new Cars(4, 2, 100, this.get_car(), player));
-            new_cars.push(new Cars(4, 0, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 100, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 100, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 0, 0, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_2(player, list, created_aditionals) {
+    medium_algorythm_2(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 450, this.get_car(), player));
-        new_cars.push(new Cars(4, 5, 450, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 450, this.get_car(), player));
 
         if (this.line == 2) {
-            new_cars.push(new Cars(4, 0, 300, this.get_car(), player));
-            new_cars.push(new Cars(4, 1, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 2, 450, this.get_car(), player));
-            new_cars.push(new Cars(4, 2, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 3, 350, this.get_car(), player));
-            new_cars.push(new Cars(4, 4, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 4, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 450, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 350, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 200, this.get_car(), player));
         }
         else if (this.line == 5) {
-            new_cars.push(new Cars(4, 5, 300, this.get_car(), player));
-            new_cars.push(new Cars(4, 4, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 3, 450, this.get_car(), player));
-            new_cars.push(new Cars(4, 3, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 2, 350, this.get_car(), player));
-            new_cars.push(new Cars(4, 1, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 1, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 450, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 350, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 200, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    medium_algorythm_3(player, list, created_aditionals) {
+    medium_algorythm_3(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(4, 0, 450, this.get_car(), player));
-        new_cars.push(new Cars(4, 5, 450, this.get_car(), player));
-        new_cars.push(new Cars(4, 2, 50, this.get_car(), player));
-        new_cars.push(new Cars(4, 3, 50, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 50, this.get_car(), player));
 
         if (this.line == 3) {
-            new_cars.push(new Cars(4, 1, 200, this.get_car(), player));
-            new_cars.push(new Cars(4, 5, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 4, 350, this.get_car(), player));
-            new_cars.push(new Cars(4, 3, 400, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 5, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 350, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 3, 400, this.get_car(), player));
 
         }
         else if (this.line == 4) {
-            new_cars.push(new Cars(4, 4, 200, this.get_car(), player));
-            new_cars.push(new Cars(4, 0, 0, this.get_car(), player));
-            new_cars.push(new Cars(4, 1, 350, this.get_car(), player));
-            new_cars.push(new Cars(4, 2, 400, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 4, 200, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 0, 0, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 1, 350, this.get_car(), player));
+            new_cars.push(new Cars(this.speed, 2, 400, this.get_car(), player));
         }
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_1(player, list, created_aditionals) {
+    hard_algorythm_1(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 250, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 350, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 150, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 250, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 350, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 150, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_2(player, list, created_aditionals) {
+    hard_algorythm_2(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 0, 350, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 100, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 250, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 480, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 430, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 0, 350, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 100, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 250, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 480, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 430, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_3(player, list, created_aditionals) {
+    hard_algorythm_3(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 380, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 450, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 150, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 200, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 200, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 400, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 380, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 150, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 200, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 200, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 400, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_4(player, list, created_aditionals) {
+    hard_algorythm_4(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 250, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 250, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 50, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 200, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 250, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 250, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 50, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_5(player, list, created_aditionals) {
+    hard_algorythm_5(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 500, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 150, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 200, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 250, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 150, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 450, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 500, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 150, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 200, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 250, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 150, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 450, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
-    hard_algorythm_6(player, list, created_aditionals) {
+    hard_algorythm_6(player, list, created_aditionals, speed) {
         var new_cars = [];
-        new_cars.push(new Cars(2.5, 0, 50, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 0, 300, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 1, 500, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 2, 450, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 3, 0, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 4, 100, this.get_car(), player));
-        new_cars.push(new Cars(2.5, 5, 300, this.get_car(), player));
+        this.speed = speed
+        new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 1, 500, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 2, 450, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 3, 0, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 4, 100, this.get_car(), player));
+        new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
         this.append_and_subscribe(player, list, new_cars, created_aditionals);
     }
 
@@ -309,11 +322,11 @@ class Levels {
             was_added = false;
             skip_y_positions = [];
         }
-        // if (new_additionals.length > 0) {            
-            // for (let a = 0; a < new_additionals.length; a++) {
-            //     created_aditionals.push(new_additionals[a]);
-            // }
-        // }
+        if (new_additionals.length > 0) {            
+            for (let a = 0; a < new_additionals.length; a++) {
+                created_aditionals.push(new_additionals[a]);
+            }
+        }
     }
 
     draw_finish_line(size, x, y, lines) {
@@ -370,11 +383,8 @@ class Levels {
     }
 }
 
-//Zmena casovania -> Asi solved?!
-//skiny
-//positioning
-//rychlost objektov v draw_levels
 //zvuky
-//spravit help
+//positioning
 //refactor
+//Zmena casovania -> Asi solved?!
 //Orvbseer checknut

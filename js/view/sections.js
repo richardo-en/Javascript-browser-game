@@ -9,10 +9,11 @@ class Section {
         let look_for_buttons = check_for_existing_elements(identifier);
         if (look_for_buttons == false) {
             new Button(80, 51, identifier, this.create_main_page).draw_button("Späť");
-            new Button(20, 30, identifier, this.test).draw_input_skin_button("skin_1");
-            new Button(55, 30, identifier, this.test).draw_input_skin_button("skin_2");
-            new Button(20, 80, identifier, this.test).draw_input_skin_button("skin_3");
-            new Button(55, 80, identifier, this.test).draw_input_skin_button("skin_4");
+            new Button(20, 30, identifier, check_skin).draw_input_skin_button("skin_1");
+            new Button(55, 30, identifier, check_skin).draw_input_skin_button("skin_2");
+            new Button(20, 80, identifier, check_skin).draw_input_skin_button("skin_3");
+            new Button(55, 80, identifier, check_skin).draw_input_skin_button("skin_4");
+            load_skins(0);
         };
     }
     
