@@ -10,37 +10,18 @@ function game_run() {
     return active_game
 }
 
-
-function increase_level() {
-    if (level < 3) {
-        var levelsCookie = getCookie("levels");
-        var levels = JSON.parse(levelsCookie);
-        levels[0].current_level++;
-        upload_to_cookie_simple_form("levels", levels);
-        load_levels(level)
-    }
-}
-
 function stop_all_elements() {
+    player.notify("stop");
     active_game = false;
-    for (let i = 0; i < created_cars.length; i++) {
-        created_cars[i].animate = false;
-    }
-    for (let a = 0; a < created_aditionals.length; a++) {
-        created_aditionals[a].animate = false;
-    }
     level_maker.animate = false;
+    document.getElementById("background_image").style.animation = "none"
 }
 
 function resume_all_elements() {
-    for (let i = 0; i < created_cars.length; i++) {
-        created_cars[i].animate = true;
-    }
-    for (let a = 0; a < created_aditionals.length; a++) {
-        created_aditionals[a].animate = true;
-    }
+    player.notify("continue")
     active_game = true;
     level_maker.animate = true;
+    document.getElementById("background_image").style.animation = "moveBackground 4s linear infinite"
 }
 
 
@@ -56,28 +37,13 @@ function unsubscribe(object, type) {
     delete object;
 }
 
-function set_time() {
-    time_value = ((2 * ((document.getElementById("main_canvas").clientHeight) - 200) / level_maker.speed) * 5)
+function set_time(speed) {
+
+    return ((2 * ((document.getElementById("main_canvas").clientHeight) - 75) / speed) * 5)
 }
 
 function power_up() {
-    for (let i = 0; i < created_cars.length; i++) {
-        created_cars[i].speed = 2;
-    }
-    for (let a = 0; a < created_aditionals.length; a++) {
-        created_aditionals[a].speed = 2;
-    }
-    set_time();
-
-    setTimeout(function () {
-        for (let i = 0; i < created_cars.length; i++) {
-            created_cars[i].speed = 2.5;
-        }
-        for (let a = 0; a < created_aditionals.length; a++) {
-            created_aditionals[a].speed = 2.5;
-        }
-    }, 2000);
-    set_time();
+    player.notify("powerup")
 }
 
 function stop_animation(type) {
@@ -96,25 +62,32 @@ function stop_animation(type) {
             draw_game_screen(type);
         } else if (type == "win") {
             draw_game_screen(type);
+            if (level < 3) {
+                increase_level(level);
+                load_levels(level);
+            }
         }
+        close_level();
     }, 100);
-    reset();
 }
 
-function winning_animation(level_object) {
-    level_object.move_back(player);
-    increase_level();
-}
-
-function countdown(preset_time, level_maker) {
+function countdown(level) {
+    var preset_time = 60;
+    if (level == 1) {
+        preset_time = 15
+    }else if(level == 2){
+        preset_time = 30
+    }
     var timer_element = document.getElementById("timer_text");
     timer = setInterval(function () {
         timer_element.textContent = preset_time;
-        preset_time--;
+        if (active_game) {
+            preset_time--;
+        }
         if (preset_time == 0) {
             clearInterval(timer);
             setTimeout(function () {
-                winning_animation(level_maker);
+                level_maker.move_back(player);
             }, 2000)
         } else if (preset_time == 2) {
             stop_generating = true;
@@ -122,8 +95,21 @@ function countdown(preset_time, level_maker) {
     }, 1000);
 }
 
+function car_sound(){
+    const car_sound = document.createElement("audio");
+    car_sound.id = "car_sound";
+    car_sound.src = "/static/sounds/car_sound.mp3";
+    car_sound.volume = (get_volume()/100);
+    car_sound.loop = true;
+    document.body.appendChild(car_sound);
+    car_sound.play();
+}
+
 function start_game() {
     remove_all_elements();
+    play_sound("/static/sounds/button_click.mp3");
+    car_sound()
+    document.getElementById("my_audio").pause();
     time_value = 2400;
     active_game = true;
     document.getElementById("background_image").style.animation = "moveBackground 2s linear infinite";
@@ -171,7 +157,7 @@ function start_game() {
                     }
                 } else if (level == 2) {
                     if (line == 1 || line == 6) {
-                        level_maker.medium_algorythm_1(player, created_cars, created_aditionals), 3.5;
+                        level_maker.medium_algorythm_1(player, created_cars, created_aditionals, 3.5);
                     } else if (line == 2 || line == 5) {
                         level_maker.medium_algorythm_2(player, created_aditionals, 3.5);
                     } else if (line == 3 || line == 4) {
@@ -183,6 +169,7 @@ function start_game() {
                 }
             }
             timeoutId = setTimeout(runLevels, time_value);
+            time_value = set_time(level_maker.speed);
         }
     }
     var timer_element = document.createElement("div");
@@ -191,16 +178,23 @@ function start_game() {
     timer_element.appendChild(timer_text);
     timer_element.id = "timer";
     document.body.appendChild(timer_element);
-
-    countdown(2, level_maker, level);
+    countdown(level);
     runLevels();
     set_time();
 };
 
 function reset() {
     created_cars = [];
-    stop = false;
     stop_generating = false;
+}
+
+function close_level(){
+    created_cars = [];
+    created_aditionals = [];
+    active_game = false;
+    stop_generating = false;
+    document.getElementById("car_sound").remove();
+    document.getElementById("timer").remove();
 }
 
 function get_stop_value() {

@@ -62,9 +62,9 @@ function draw_image(positon_top, position_left, section_identifier, image_path, 
 
 window.onload = function() {
     var scripts = [
-      "/data/data.js",
-      "/js/observer/observer.js",
-      "/js/model/level_rewards.js",
+      "/js/model/data.js",
+      "/js/model/observer.js",
+      "/js/model/object.js",
       "/js/view/additionals.js",
       "/js/view/draw_cars.js",
       "/js/view/draw_levels.js",
@@ -74,19 +74,26 @@ window.onload = function() {
       "/js/controller/button_controllers.js",
       "/js/controller/canvas_buttons.js",
       "/js/model/run_game.js",
-      "/js/model/player.js"
+      "/js/model/player_parent.js",
+      "/js/view/player.js"
     ];
   
+    var mainScript = document.getElementById("main_script");
+
     scripts.forEach(function(script) {
       var scriptElement = document.createElement("script");
       scriptElement.src = script;
-      document.head.appendChild(scriptElement);
+      mainScript.parentNode.insertBefore(scriptElement, mainScript);
     });
+  
     setTimeout(function(){
-        new Section().create_skins();
-        new Section().create_rewards();
-        new Section().create_setting();
-        new Section().create_main_page();
-        start_music();
-    }, 100)
-}
+      new Section().create_skins();
+      new Section().create_rewards();
+      new Section().create_setting();
+      new Section().create_main_page();
+    }, 500);
+  
+    setTimeout(function(){
+      start_music();
+    }, 1000);
+  }

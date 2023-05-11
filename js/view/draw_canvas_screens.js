@@ -9,12 +9,11 @@ class Canvas_parent {
     constructor() {
         this.positions = [];
         this.button_height = 40;
-        this.canvas_controller = document.getElementById("main_canvas");
-        this.ctx = this.canvas_controller.getContext("2d");
-        this.position_x = this.canvas_controller.width / 4
-        this.width = this.canvas_controller.width / 2
-        this.position_y = this.canvas_controller.height / 4
-        this.height = this.canvas_controller.height / 2
+        this.ctx = canvas.getContext("2d");
+        this.position_x = canvas.clientWidth / 4
+        this.width = canvas.clientWidth / 2
+        this.position_y = canvas.clientHeight / 4
+        this.height = canvas.clientHeight / 2
     }
 
     draw_button(button_text) {
@@ -89,7 +88,7 @@ class Canvas_screens extends Canvas_parent {
     }
     
     losing_screen() {
-        this.canvas_controller.className = "touchable"
+        canvas.className = "touchable"
         this.type = "lose"
         this.image.src = "/static/images/lose_screen_image.png";
         this.background_image.addEventListener("load" , () => {
@@ -103,7 +102,7 @@ class Canvas_screens extends Canvas_parent {
     }
 
     winning_screen() {
-        this.canvas_controller.className = "touchable"
+        canvas.className = "touchable"
         this.type = "win";
         this.image.src = "/static/images/win_screen_image.png";
         this.background_image.addEventListener("load" , () => {
@@ -118,7 +117,7 @@ class Canvas_screens extends Canvas_parent {
     }
 
     break_screen(){
-        this.canvas_controller.className = "touchable"
+        canvas.className = "touchable"
         this.type = "break"
         this.image.src = "/static/images/pause_screen_image.png";
         this.background_image.addEventListener("load" , () => {

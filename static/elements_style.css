@@ -128,7 +128,7 @@
 
 /* REWARD VIEWS */
 .reward_button {
-  width: 50vw;
+  width: 40vw;
   height: 5vh;
   border: 2px solid #202020;
   border-radius: 3px;
@@ -172,7 +172,7 @@
 #timer {
   position: absolute;
   right: 150px;
-  top: 800px;
+  top: 600px;
   color: black;
 }
 
@@ -198,4 +198,11 @@
 .locked {
   opacity: 50%;
   pointer-events: none;
+}
+
+#lives{
+  position: absolute;
+  top: 800;
+  width: 10vw;
+  background-color: #0f6999;
 }

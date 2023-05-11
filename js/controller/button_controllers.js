@@ -1,6 +1,7 @@
+var audio;
 function start_music() {
     audio = document.getElementById("my_audio");
-    // audio.play();
+    audio.play();
     audio.addEventListener("ended", function () {
         audio.currentTime = 0;
         audio.play();
@@ -11,10 +12,15 @@ function check_skin(event) {
     var price = parseInt(event.target.textContent);
     let buttons = document.querySelectorAll(".skin_button");
     var index = Array.prototype.indexOf.call(buttons, event.target);
+
+    var quests = JSON.parse(getCookie('quests'));
+    var count = parseInt(quests[2].current_status);
+
     if (price) {
         var current_amount = getCookie("coin");
-        if (current_amount >= price) {
+        if (current_amount >= price && count <= 3) {
             increase_coins(-price);
+            increase_status(2);
             var skins = JSON.parse(getCookie('skins'));
             skins[index].unlocked = true;
             upload_to_cokiee("skins", skins);
@@ -24,11 +30,14 @@ function check_skin(event) {
     } else {
         load_skins(index);
     }
+    play_sound("/static/sounds/button_click.mp3");
 }
 
 function set_volume() {
+    play_sound("/static/sounds/button_click.mp3");
     let mute_button = document.getElementById("button_container");
-    let new_volume_value = document.getElementById("volume_bar").value / 100;
+    var audio = document.getElementById("my_audio");
+    var new_volume_value = document.getElementById("volume_bar").value / 100;
     if (new_volume_value == 0 && audio.volume != 0) {
         audio.pause();
         audio.currentTime = 0;
@@ -45,14 +54,15 @@ function set_volume() {
     audio.volume = new_volume_value;
 }
 
-
-
 function save_settings_button() {
     set_settings_values();
+    set_volume();
     new Section().create_main_page();
+    play_sound("/static/sounds/button_click.mp3");
 }
 
 function draw_help_screen() {
+    play_sound("/static/sounds/button_click.mp3");
     document.getElementById("background_image").style.animation = "none"
     remove_all_elements();
     new Canvas_screens().clear_screen();
@@ -72,9 +82,11 @@ function remove_all_elements() {
 
 //Settings
 function switch_mute_image() {
+    play_sound("/static/sounds/button_click.mp3");
     let button_image = document.getElementById("volume");
     let mute_button = document.getElementById("button_container");
     let new_volume_value = document.getElementById("volume_bar");
+    var audio = document.getElementById("my_audio");
     if (mute_button.className == "on") {
         button_image.src = "/static/images/volume_off.svg";
         mute_button.className = "off"
@@ -137,6 +149,7 @@ document.addEventListener('keydown', function (event) {
         stop_all_elements();
         setTimeout(function () {
             draw_game_screen("break");
+            document.getElementById("car_sound").pause();
         }, 100)
     }
 });
@@ -150,13 +163,16 @@ function check_for_rewards(event) {
 
     for (let i = 0; i < ids.length; i++) {
         if (element_id === ids[i]) {
-            if (quests[i].current_status >= quests[i].reward_goal) {
+            let current_status = parseInt(quests[i].current_status,10);
+            let reward_goal = parseInt(quests[i].reward_goal,10);
+            let reward = parseInt(quests[i].reward,10);
+            if (current_status >= reward_goal && ((i == 1 && current_status <= 3) || (i == 2 && current_status <= 3)|| (i == 0))) {
                 box.textContent = 'Coins were added!';
                 box.style.background = "green";
-                increase_coins(quests[i].reward);
+                increase_coins(reward);
                 increase_reward(i)
             } else {
-                box.textContent = 'Coins weren\'t added! Your current count for task number ';
+                box.textContent = 'Coins weren\'t added!';
                 box.style.background = "red"
             }
             document.body.appendChild(box);
@@ -170,15 +186,29 @@ function check_for_rewards(event) {
             break;
         }
     }
+    play_sound("/static/sounds/button_click.mp3");
 }
 
 function start_game_controller(event) {
-    var unlocked_levels = JSON.parse(getCookie("levels"));
-    var curr_level = parseInt(unlocked_levels[0].current_level, 10)
     var level_id = parseInt(event.target.textContent);
-    if (curr_level >= level_id) {
-        load_levels(level_id);
-    } else {
-        load_levels(0);
-    }
+    load_levels(level_id);
+    play_sound("/static/sounds/button_click.mp3");
 }
+
+function play_sound(audio_source) {
+    const click_sound = document.createElement("audio");
+    click_sound.src = audio_source;
+    setTimeout(function () {
+      click_sound.volume = (get_volume()/100);
+      click_sound.play();
+    }, 100);
+  
+    click_sound.addEventListener("ended", () => {
+      click_sound.remove();
+    });
+  
+    window.addEventListener("load", function() {
+      click_sound.volume = (get_volume()/100);
+      click_sound.play();
+    });
+  }

@@ -28,7 +28,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 2, 200, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     easy_algorythm_2(player, list, created_aditionals, speed) {
@@ -49,7 +49,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 1, 200, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 3, 300, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     easy_algorythm_3(player, list, created_aditionals, speed) {
@@ -71,7 +71,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 3, 200, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 1, 400, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     medium_algorythm_1(player, list, created_aditionals, speed) {
@@ -92,7 +92,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 2, 100, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 0, 0, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     medium_algorythm_2(player, list, created_aditionals, speed) {
@@ -119,7 +119,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 1, 0, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 1, 200, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     medium_algorythm_3(player, list, created_aditionals, speed) {
@@ -143,7 +143,7 @@ class Levels {
             new_cars.push(new Cars(this.speed, 1, 350, this.get_car(), player));
             new_cars.push(new Cars(this.speed, 2, 400, this.get_car(), player));
         }
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_1(player, list, created_aditionals, speed) {
@@ -156,7 +156,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 4, 50, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 4, 350, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 150, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_2(player, list, created_aditionals, speed) {
@@ -170,7 +170,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 4, 50, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 4, 480, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 430, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_3(player, list, created_aditionals, speed) {
@@ -185,7 +185,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 3, 200, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 200, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 400, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_4(player, list, created_aditionals, speed) {
@@ -199,7 +199,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 3, 250, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 4, 250, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 50, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_5(player, list, created_aditionals, speed) {
@@ -213,7 +213,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 4, 0, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 150, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 450, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     hard_algorythm_6(player, list, created_aditionals, speed) {
@@ -227,7 +227,7 @@ class Levels {
         new_cars.push(new Cars(this.speed, 3, 0, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 4, 100, this.get_car(), player));
         new_cars.push(new Cars(this.speed, 5, 300, this.get_car(), player));
-        this.append_and_subscribe(player, list, new_cars, created_aditionals);
+        this.append_and_subscribe(player, new_cars);
     }
 
     get_car() {
@@ -236,32 +236,38 @@ class Levels {
     }
 
 
-    append_and_subscribe(player, list, new_cars, created_aditionals) {
-        this.generate_additionals(new_cars, player, created_aditionals);
+    append_and_subscribe(player, new_cars) {
+        this.generate_additionals(new_cars, player);
         for (let i = 0; i < new_cars.length; i++) {
             new_cars[i].move_back();
-            list.push(new_cars[i]);
+            player.subscribe(new_cars[i]);
         }
     }
 
     create_additionals(random_line, y_pos, player, new_additionals) {
         var make_power_up = Math.floor(Math.random() * (6))
-        if (make_power_up < 5) {
-            var new_object = new Additionals(2.5, random_line, y_pos, "boost", player);
-        } else {
-            var new_object = new Additionals(2.5, random_line, y_pos, "coin", player);
+        if (make_power_up < 1) {
+            var new_object = new Additionals(this.speed, random_line, y_pos, "boost", player);
+            new_additionals.push(new_object);
+            player.subscribe(new_object);
+        } else if (make_power_up < 3){
+            var new_object = new Additionals(this.speed, random_line, y_pos, "coin", player);
+            new_additionals.push(new_object);
+            player.subscribe(new_object);
+        }else{
+            var new_object = new Additionals(this.speed, random_line, y_pos, "helth", player);
+            new_additionals.push(new_object);
+            player.subscribe(new_object);
         }
-        new_additionals.push(new_object);
-        return new_additionals;
     }
 
-    generate_additionals(new_cars, player,created_aditionals) {
+    generate_additionals(new_cars, player) {
         var was_added = false, was_moved = false, can_be_added = true;
         var added_count = Math.floor(Math.random() * (5) + 1), step = 50;
         var new_additionals = []
         for (let random_number = 0; random_number < added_count; random_number++) {
             var random_line = Math.floor(Math.random() * (5));
-            var y_pos = 100;
+            var y_pos = 0;
             var skip_y_positions = []
             for (let i = 0; i < new_cars.length; i++) {
                 var new_car = new_cars[i];
@@ -272,10 +278,11 @@ class Levels {
             while (was_added == false) {
                 if (skip_y_positions.length > 0) {
                     for (let a = 0; a < skip_y_positions.length; a++) {
-                        if (((y_pos + step >= skip_y_positions[a].position.y + canvas.clientHeight) && (y_pos <= skip_y_positions[a].position.y + canvas.clientHeight)) ||
-                            ((y_pos - (step / 2) <= skip_y_positions[a].position.y + canvas.clientHeight + skip_y_positions[a].position.height) && (y_pos + step >= skip_y_positions[a].position.y + skip_y_positions[a].position.height + canvas.clientHeight))
-                            || ((y_pos >= skip_y_positions[a].position.y + canvas.clientHeight) && (y_pos + step <= skip_y_positions[a].position.y + skip_y_positions[a].position.height + canvas.clientHeight))) {
-                            y_pos += 25;
+                        let s_pos = y_pos + step;
+                        let car_1 = skip_y_positions[a].position.y + canvas.clientHeight;
+                        let car_2 = skip_y_positions[a].position.y +120 + canvas.clientHeight;
+                        if (((y_pos <= car_1) && (s_pos >= car_1)) || ((y_pos >= car_1) && (s_pos <= car_2)) || ((y_pos <= car_2) && (s_pos >= car_2)) || (y_pos == car_1 || s_pos == car_2)) {
+                            y_pos += step;
                             can_be_added = false;
                             was_moved = true;
                             break;
@@ -284,7 +291,8 @@ class Levels {
 
                     if (new_additionals.length > 0 && was_moved == false) {
                         for (let c = 0; c < new_additionals.length; c++) {
-                            if (((y_pos + 2 * step > new_additionals[c].position.y + canvas.clientHeight) && (y_pos < new_additionals[c].position.y + canvas.clientHeight)) || ((y_pos < new_additionals[c].position.y + canvas.clientHeight + 2 * step) && (y_pos > new_additionals[c].position.y + canvas.clientHeight))) {
+                            if (((y_pos + 2 * step >= new_additionals[c].position.y + canvas.clientHeight) && (y_pos <= new_additionals[c].position.y + canvas.clientHeight)) 
+                            || ((y_pos <= new_additionals[c].position.y + canvas.clientHeight + 2 * step) && (y_pos >= new_additionals[c].position.y + canvas.clientHeight))) {
                                 can_be_added = false;
                                 was_moved = true;
                                 y_pos += step;
@@ -309,7 +317,7 @@ class Levels {
                         can_be_added = true;
                     }
 
-                    if (y_pos > canvas.clientHeight - 150) {
+                    if (y_pos > canvas.clientHeight) {
                         break;
                     }
 
@@ -321,11 +329,6 @@ class Levels {
             }
             was_added = false;
             skip_y_positions = [];
-        }
-        if (new_additionals.length > 0) {            
-            for (let a = 0; a < new_additionals.length; a++) {
-                created_aditionals.push(new_additionals[a]);
-            }
         }
     }
 
@@ -379,12 +382,7 @@ class Levels {
             this.animateFrame = null;
             ctx.clearRect(0,0,canvas.clientWidth, canvas.clientHeight);
             stop_animation("win")
+            play_sound("/static/sounds/win_level.wav")
         }
     }
 }
-
-//zvuky
-//positioning
-//refactor
-//Zmena casovania -> Asi solved?!
-//Orvbseer checknut

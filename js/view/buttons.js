@@ -1,4 +1,3 @@
-//Create new button
 class Button_parent{
     constructor(position_from_top, position_from_left, section_id,  button_function){
         this.positon_top = position_from_top;
@@ -7,15 +6,17 @@ class Button_parent{
         this.section_identifier = section_id;
     }
 
-    calculate_canvas_position(percentage) {
-        percentage = ((window.innerWidth - 1000) / 2) + (1000 * (percentage / 100)) - 100;
-        percentage = "" + percentage + "px";
-        return percentage;
+    calculate_canvas_position(percentage, object) {
+        var canvas = document.getElementById("main_canvas");
+        var canvasWidth = canvas.clientWidth;
+        var width = canvasWidth * (percentage / 100);
+        var position = ((window.innerWidth - canvasWidth) / 2) + width - 100;
+        return `${position}px`;
     }
 
     set_element_position(object, positon_top, position_left){
         object.style.position = "absolute";
-        object.style.left = this.calculate_canvas_position(position_left);
+        object.style.left = this.calculate_canvas_position(position_left , object);
         object.style.top = "" + (600 * (positon_top / 100)) + "px";
         return object
     }

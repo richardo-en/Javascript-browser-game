@@ -8,6 +8,7 @@ function return_to_main_menu() {
     new Section().create_main_page();
     canvas.className = "not_touchable"
     document.getElementById("background_image").style.animation = "moveBackground 4s linear infinite"
+    start_music();
     reset();
 }
 
@@ -28,7 +29,9 @@ function next_level() {
 }
 
 function continue_game(){
+    play_sound("/static/sounds/button_click.mp3");
     ctx.clearRect(0,0,canvas.clientWidth, canvas.clientHeight);
+    document.getElementById("car_sound").play();
     resume_all_elements();
 }
 
@@ -52,10 +55,13 @@ canvas.addEventListener('click', function (event) {
                     }
                 } else if (canvas_screen.get_type() == "win") {
                     if (i == 0) {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
                         next_level();
                     } else if (i == 1) {
                         return_to_main_menu();
                     } else if (i == 2) {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        reset();
                         start_game();
                     }
                 } else if (canvas_screen.get_type() == "break") {
