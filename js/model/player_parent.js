@@ -1,7 +1,7 @@
 var canvas = document.getElementById("main_canvas");
 var ctx = canvas.getContext("2d");
 
-class Player_parent extends Observer{
+class Player_parent extends Observer {
     constructor(image_path) {
         super();
         this.image = new Image();
@@ -37,10 +37,9 @@ class Player_parent extends Observer{
                 "height": this.position.height
             }
         ]
-        this.live = 2;
     }
 
-    change_image(link){
+    change_image(link) {
         this.image.src = link
     }
 
@@ -133,24 +132,18 @@ class Player_parent extends Observer{
 
     update(object) {
         if (this.check_collision(object)) {
-            if ( object.name == "car") {
-                if (this.live == 1) {
-                    stop_animation("lose");
-                    play_sound("/static/sounds/car_crash.mp3");
-                    increase_status(0);
-                }else{
-                    this.live -= 1;
-                }
-            }else if(object.name == "coin"){
+            if (object.name == "car") {
+                stop_animation("lose");
+                play_sound("/static/sounds/car_crash.mp3");
+                increase_status(0);
+            } else if (object.name == "coin") {
                 play_sound("/static/sounds/coin.wav")
                 increase_coins(1);
                 object.delete_object();
-            }else if(object.name == "boost"){
+            } else if (object.name == "boost") {
                 play_sound("/static/sounds/coin.wav")
                 power_up();
                 object.delete_object();
-            }else if(object.name == "live"){
-                this.live += 1;
             }
         }
     }

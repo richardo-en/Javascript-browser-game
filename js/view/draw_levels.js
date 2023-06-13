@@ -12,7 +12,7 @@ class Levels {
         this.speed;
     }
 
-    easy_algorythm_1(player, list, created_aditionals, speed) {
+    easy_algorythm_1(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 0, this.get_car(), player));
@@ -31,7 +31,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    easy_algorythm_2(player, list, created_aditionals, speed) {
+    easy_algorythm_2(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
@@ -52,7 +52,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    easy_algorythm_3(player, list, created_aditionals, speed) {
+    easy_algorythm_3(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
@@ -74,7 +74,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    medium_algorythm_1(player, list, created_aditionals, speed) {
+    medium_algorythm_1(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 300, this.get_car(), player));
@@ -95,7 +95,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    medium_algorythm_2(player, list, created_aditionals, speed) {
+    medium_algorythm_2(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 450, this.get_car(), player));
@@ -122,7 +122,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    medium_algorythm_3(player, list, created_aditionals, speed) {
+    medium_algorythm_3(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 450, this.get_car(), player));
@@ -146,7 +146,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_1(player, list, created_aditionals, speed) {
+    hard_algorythm_1(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
@@ -159,7 +159,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_2(player, list, created_aditionals, speed) {
+    hard_algorythm_2(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
@@ -173,7 +173,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_3(player, list, created_aditionals, speed) {
+    hard_algorythm_3(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 380, this.get_car(), player));
@@ -188,7 +188,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_4(player, list, created_aditionals, speed) {
+    hard_algorythm_4(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
@@ -202,7 +202,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_5(player, list, created_aditionals, speed) {
+    hard_algorythm_5(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 500, this.get_car(), player));
@@ -216,7 +216,7 @@ class Levels {
         this.append_and_subscribe(player, new_cars);
     }
 
-    hard_algorythm_6(player, list, created_aditionals, speed) {
+    hard_algorythm_6(player, speed) {
         var new_cars = [];
         this.speed = speed
         new_cars.push(new Cars(this.speed, 0, 50, this.get_car(), player));
@@ -246,16 +246,12 @@ class Levels {
 
     create_additionals(random_line, y_pos, player, new_additionals) {
         var make_power_up = Math.floor(Math.random() * (6))
-        if (make_power_up < 1) {
+        if (make_power_up < 3) {
             var new_object = new Additionals(this.speed, random_line, y_pos, "boost", player);
             new_additionals.push(new_object);
             player.subscribe(new_object);
-        } else if (make_power_up < 3){
+        } else{
             var new_object = new Additionals(this.speed, random_line, y_pos, "coin", player);
-            new_additionals.push(new_object);
-            player.subscribe(new_object);
-        }else{
-            var new_object = new Additionals(this.speed, random_line, y_pos, "helth", player);
             new_additionals.push(new_object);
             player.subscribe(new_object);
         }

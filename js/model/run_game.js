@@ -1,5 +1,4 @@
 var player;
-var created_cars = [], created_aditionals = [];
 var stop_generating = false;
 var stop = false;
 let timeoutId;
@@ -22,19 +21,6 @@ function resume_all_elements() {
     active_game = true;
     level_maker.animate = true;
     document.getElementById("background_image").style.animation = "moveBackground 4s linear infinite"
-}
-
-
-
-function unsubscribe(object, type) {
-    if (type == "car") {
-        let index_of_object = created_cars.indexOf(object);
-        created_cars.splice(index_of_object, 1);
-    } else if (type == "additional") {
-        let index_of_object = created_aditionals.indexOf(object);
-        created_aditionals.splice(index_of_object, 1);
-    }
-    delete object;
 }
 
 function set_time(speed) {
@@ -149,23 +135,23 @@ function start_game() {
                 level_maker.line = line;
                 if (level == 1) {
                     if (line == 1 || line == 6) {
-                        level_maker.easy_algorythm_1(player, created_cars, created_aditionals, 2.5);
+                        level_maker.easy_algorythm_1(player, 2.5);
                     } else if (line == 2 || line == 5) {
-                        level_maker.easy_algorythm_2(player, created_cars, created_aditionals, 2.5);
+                        level_maker.easy_algorythm_2(player, 2.5);
                     } else if (line == 3 || line == 4) {
-                        level_maker.easy_algorythm_3(player, created_cars, created_aditionals, 2.5);
+                        level_maker.easy_algorythm_3(player, 2.5);
                     }
                 } else if (level == 2) {
                     if (line == 1 || line == 6) {
-                        level_maker.medium_algorythm_1(player, created_cars, created_aditionals, 3.5);
+                        level_maker.medium_algorythm_1(player, 3.5);
                     } else if (line == 2 || line == 5) {
-                        level_maker.medium_algorythm_2(player, created_aditionals, 3.5);
+                        level_maker.medium_algorythm_2(player, 3.5);
                     } else if (line == 3 || line == 4) {
-                        level_maker.medium_algorythm_3(player, created_cars, created_aditionals, 3.5);
+                        level_maker.medium_algorythm_3(player, 3.5);
                     }
                 } else {
                     const functionName = `hard_algorythm_${line}`;
-                    level_maker[functionName](player, created_cars, created_aditionals, 3.5);
+                    level_maker[functionName](player, 3.5);
                 }
             }
             timeoutId = setTimeout(runLevels, time_value);
@@ -184,13 +170,10 @@ function start_game() {
 };
 
 function reset() {
-    created_cars = [];
     stop_generating = false;
 }
 
 function close_level(){
-    created_cars = [];
-    created_aditionals = [];
     active_game = false;
     stop_generating = false;
     document.getElementById("car_sound").remove();

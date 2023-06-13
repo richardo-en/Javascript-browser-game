@@ -16,12 +16,7 @@ class Additionals extends Object_parent {
                 this.move_back();
                 this.draw_object();
             };
-        }else{
-            this.set_positions();
-            this.move_back();
-            this.draw_object();
         }
-        this.add = false;
         if (type == "coin") {
             this.spriteInterval = setInterval(() => {
                 this.next_sprite();
@@ -35,9 +30,6 @@ class Additionals extends Object_parent {
             ctx.drawImage(this.image, this.coin_sprite_position[0], this.coin_sprite_position[1], this.coin_sprite_width[this.coin_sprite_index], this.coin_sprite_height, this.position.x, this.position.y, this.position.width, this.position.height);
         } else if(this.name == "boost") {
             ctx.drawImage(this.image, this.position.x, this.position.y, this.position.width, this.position.height)
-        }else{
-            ctx.fillStyle = "red";
-            ctx.fillRect(this.position.x, this.position.y, 5,5);
         }
     }
 
