@@ -199,10 +199,3 @@
   opacity: 50%;
   pointer-events: none;
 }
-
-#lives{
-  position: absolute;
-  top: 800;
-  width: 10vw;
-  background-color: #0f6999;
-}

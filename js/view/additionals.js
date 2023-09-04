@@ -5,18 +5,17 @@ class Additionals extends Object_parent {
     constructor(speed, lane, pos_y, type, player) {
         super(speed, lane, pos_y, type, player)
         this.image = new Image();
-        if (type == "boost" || type == "coin") {
-            this.image.src = "/static/images/" + type + ".png";
-            this.image.onload = () => {
-                this.coin_sprite_width = [100, 90, 60, 100, 50, 100];
-                this.coin_sprite_position = [0, 0]
-                this.coin_sprite_height = 100;
-                this.coin_sprite_index = 0;
-                this.set_positions();
-                this.move_back();
-                this.draw_object();
-            };
-        }
+        this.image.src = "/static/images/" + type + ".png";
+        this.image.onload = () => {
+            this.coin_sprite_width = [100, 90, 60, 100, 50, 100];
+            this.coin_sprite_position = [0, 0]
+            this.coin_sprite_height = 100;
+            this.coin_sprite_index = 0;
+            this.set_positions();
+            this.move_back();
+            this.draw_object();
+        };
+        this.add = false;
         if (type == "coin") {
             this.spriteInterval = setInterval(() => {
                 this.next_sprite();
@@ -28,7 +27,7 @@ class Additionals extends Object_parent {
         ctx.clearRect(this.position.x - 5, this.position.y - 5, this.position.width + 10, this.position.height + 10);
         if (this.name == "coin") {
             ctx.drawImage(this.image, this.coin_sprite_position[0], this.coin_sprite_position[1], this.coin_sprite_width[this.coin_sprite_index], this.coin_sprite_height, this.position.x, this.position.y, this.position.width, this.position.height);
-        } else if(this.name == "boost") {
+        } else {
             ctx.drawImage(this.image, this.position.x, this.position.y, this.position.width, this.position.height)
         }
     }

@@ -48,9 +48,9 @@ class Object_parent{
     }
 
     powerup(){
-        this.speed -= 0.5;
+        this.speed -= 0.3;
         setTimeout(function () {
-            this.speed += 0.5
-        }, 200);
+            this.speed += 0.3
+        }, 2000);
     }
 }

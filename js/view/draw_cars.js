@@ -45,3 +45,46 @@ class Cars extends Object_parent {
     }
 
 }
+
+/*
+min - 40 bod
+6 - dokumentacia a implementacia, 
+opis objektov v dokumentacii - 2
+opis zaujimavych casti implementacie - mvc, observer - 2
+zhodnotenie a porovnanie navrhov - 2 (kb - 1, kb - 2) co sa zmenilo v kb4 oproti kb1 , kb2
+5b - prezentacia, 
+    2b audio prvky + zvuky
+    3b graficke prvky (to co je v dokumentacii)
+
+architektura - 12b
+    mvc - 5b
+    observer - 7b
+
+implementacia 10b
+    3b - scena kde sa panacik hybe
+    3b - vytvaranie ojektov pomocou konstruktorov
+    1b - rozdelenie do precinkov etc.
+    1b - pouzitie script elementov len v head casti
+    2b - oddeleny hlavny cyklus od logiky
+
+8b herna volaco interakcia
+    4b - kolizia minimum 4 kolizia s roznymi objektami
+        2b ze su tam
+        2 ze su spravne spravene
+
+3b proceduralne riadenie animacie objektov - sprite
+
+1b ovladanie pomocou klavesnice alebo myse
+
+10b hra
+    4b dokoncena a fungujuca herna logika
+    2b hra je hratelna a ma pointu
+    4b stupnovanie obtiaznosti, zvysenie levelu
+
+5b hodnotenie komplexnosti a praca na projekte
+
+2b zapracovane pripomienky ????
+
+1 zaujimavy obrazok z hry
+1 kratke video z hry v dokumentacii
+*/ 
