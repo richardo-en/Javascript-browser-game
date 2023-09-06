@@ -17,22 +17,22 @@ var quests = [
 ]
 
 var skins = [{
-  "link" : ["german_police_car.png"],
+  "link" : ["german_police_car.webp"],
   "unlocked" : true,
   "cost" : 0
 },
 {
-  "link" : ["police_car.png"],
+  "link" : ["police_car.webp"],
   "unlocked" : false,
   "cost" : 50
 },
 {
-  "link" : ["police_car_black.png"],
+  "link" : ["police_car_black.webp"],
   "unlocked" : false,
   "cost" : 100
 },
 {
-  "link" : ["police-car-siren-blue.png" , "police-car-siren-red.png"],
+  "link" : ["police-car-siren-blue.webp" , "police-car-siren-red.webp"],
   "unlocked" : false,
   "cost" : 100
 }

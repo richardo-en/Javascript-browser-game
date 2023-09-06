@@ -1,3 +1,4 @@
+
 class Player extends Player_parent {
     constructor(image_path) {
         super(image_path);

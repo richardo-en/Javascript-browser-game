@@ -8,7 +8,7 @@
   font-weight: bold;
   font-size: 20px;
   min-width: 200px;
-  background-image: url("/static/images/button_background.jpg");
+  background-image: url("/static/images/button_background.webp");
   overflow: hidden;
   background-size: 200px 100px;
   color: black;
@@ -26,7 +26,7 @@
   font-weight: bold;
   font-size: 20px;
   /* max-width: 200px; */
-  background-image: url("/static/images/button_background.jpg");
+  background-image: url("/static/images/button_background.webp");
   overflow: hidden;
   background-size: 200px 100px;
   color: black;
@@ -47,7 +47,7 @@
   width: 5vw;
   height: 6vh;
   color: black;
-  background-image: url("/static/images/button_background.jpg");
+  background-image: url("/static/images/button_background.webp");
   background-size: 200px 100px;
   border: 2px solid #202020;
   line-height: 6vh;
@@ -56,7 +56,7 @@
 }
 /* #input_key::-webkit-slider-thum{
     background-color: transparent;
-    background-image: url("/static/images/volume_bar.png");
+    background-image: url("/static/images/volume_bar.webp");
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -95,34 +95,34 @@
   background-size: 50% auto, auto 120%;
 }
 .skin_1 {
-  background-image: url("/static/images/cars/police/german_police_car.png"),
-    url("/static/images/button_background.jpg");
+  background-image: url("/static/images/cars/police/german_police_car.webp"),
+    url("/static/images/button_background.webp");
 }
 
 .skin_2 {
-  background-image: url("/static/images/cars/police/police_car_black.png"),
-    url("/static/images/button_background.jpg");
+  background-image: url("/static/images/cars/police/police_car_black.webp"),
+    url("/static/images/button_background.webp");
 }
 
 .skin_3 {
-  background-image: url("/static/images/cars/police/police_car.png"),
-    url("/static/images/button_background.jpg");
+  background-image: url("/static/images/cars/police/police_car.webp"),
+    url("/static/images/button_background.webp");
 }
 
 .skin_4 {
-  background-image: url("/static/images/cars/police/police-car-siren-blue.png"),
-    url("/static/images/button_background.jpg");
+  background-image: url("/static/images/cars/police/police-car-siren-blue.webp"),
+    url("/static/images/button_background.webp");
   animation: change_image 1s infinite;
 }
 
 @keyframes change_image {
   0% {
-    background-image: url("/static/images/cars/police/police-car-siren-blue.png"),
-      url("/static/images/button_background.jpg");
+    background-image: url("/static/images/cars/police/police-car-siren-blue.webp"),
+      url("/static/images/button_background.webp");
   }
   50% {
-    background-image: url("/static/images/cars/police/police-car-siren-red.png"),
-      url("/static/images/button_background.jpg");
+    background-image: url("/static/images/cars/police/police-car-siren-red.webp"),
+      url("/static/images/button_background.webp");
   }
 }
 

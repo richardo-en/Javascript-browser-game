@@ -18,7 +18,7 @@
     padding: 0;
     width: 1000px;
     height: 600px;
-    background: url('/static/images/infinite_road.png') repeat-y;
+    background: url('/static/images/infinite_road.webp') repeat-y;
     animation: moveBackground 4s linear infinite;
   }
   

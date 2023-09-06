@@ -27,7 +27,7 @@ class Section {
             new Button(60, 30, identifier, this.create_skins).draw_button('Skins');
             new Button(60, 70, identifier, this.create_rewards).draw_button('Rewards');
             new Button(40, 70, identifier, this.create_setting).draw_button('Options');
-            new Button(20, 38.5, identifier).draw_image("/static/images/game_logo.png");
+            new Button(20, 38.5, identifier).draw_image("/static/images/game_logo.webp");
             new Button(80, 50, identifier, draw_help_screen).draw_button('Help');
             new Button(80, 15, identifier, start_game_controller).draw_level_button('1');
             new Button(80, 21, identifier, start_game_controller).draw_level_button('2');
@@ -57,9 +57,9 @@ class Section {
         let identifier = "settings_view";
         let look_for_buttons = check_for_existing_elements(identifier);
         if (look_for_buttons == false) {
-            new Button(10, 15, identifier, this.test).draw_image("/static/images/movement_left_settings.png");
-            new Button(30, 15, identifier, this.test).draw_image("/static/images/movement_right_settings.png");
-            new Button(50, 15, identifier, switch_mute_image).draw_image("/static/images/volume_settings.png");
+            new Button(10, 15, identifier, this.test).draw_image("/static/images/movement_left_settings.webp");
+            new Button(30, 15, identifier, this.test).draw_image("/static/images/movement_right_settings.webp");
+            new Button(50, 15, identifier, switch_mute_image).draw_image("/static/images/volume_settings.webp");
             new Button(80, 51, identifier, save_settings_button).draw_button("Back");
             new Button(5, 103, identifier, switch_mute_image).draw_volume("/static/images/volume_on.svg", "volume");
             new Button(10, 60, identifier, this.test).draw_input_button("movement_left");

@@ -5,7 +5,7 @@ class Additionals extends Object_parent {
     constructor(speed, lane, pos_y, type, player) {
         super(speed, lane, pos_y, type, player)
         this.image = new Image();
-        this.image.src = "/static/images/" + type + ".png";
+        this.image.src = "/static/images/" + type + ".webp";
         this.image.onload = () => {
             this.coin_sprite_width = [100, 90, 60, 100, 50, 100];
             this.coin_sprite_position = [0, 0]

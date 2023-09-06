@@ -232,7 +232,7 @@ class Levels {
 
     get_car() {
         var cars = ["blue", "green", "purple", "red", "yellow"]
-        return "/static/images/cars/" + cars[Math.floor(Math.random() * (5))] + "_car.png";
+        return "/static/images/cars/" + cars[Math.floor(Math.random() * (5))] + "_car.webp";
     }
 
 

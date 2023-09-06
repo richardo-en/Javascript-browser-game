@@ -84,13 +84,13 @@ class Canvas_screens extends Canvas_parent {
         this.type = null;
         this.image = new Image();
         this.background_image = new Image();
-        this.background_image.src = "/static/images/screen_background.jpg";
+        this.background_image.src = "/static/images/screen_background.webp";
     }
     
     losing_screen() {
         canvas.className = "touchable"
         this.type = "lose"
-        this.image.src = "/static/images/lose_screen_image.png";
+        this.image.src = "/static/images/lose_screen_image.webp";
         this.background_image.addEventListener("load" , () => {
             this.draw_background(this.background_image);
         })
@@ -104,7 +104,7 @@ class Canvas_screens extends Canvas_parent {
     winning_screen() {
         canvas.className = "touchable"
         this.type = "win";
-        this.image.src = "/static/images/win_screen_image.png";
+        this.image.src = "/static/images/win_screen_image.webp";
         this.background_image.addEventListener("load" , () => {
             this.draw_background(this.background_image);
         })
@@ -119,7 +119,7 @@ class Canvas_screens extends Canvas_parent {
     break_screen(){
         canvas.className = "touchable"
         this.type = "break"
-        this.image.src = "/static/images/pause_screen_image.png";
+        this.image.src = "/static/images/pause_screen_image.webp";
         this.background_image.addEventListener("load" , () => {
             this.draw_background(this.background_image);
         })
@@ -136,12 +136,12 @@ class Canvas_screens extends Canvas_parent {
         let y_position = 100;
         let image_list = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 
-        image_list[0].src = "/static/images/movement_left_settings.png";
-        image_list[1].src = "/static/images/movement_right_settings.png";
-        image_list[2].src = "/static/images/pause_screen_image.png";
-        image_list[3].src = "/static/images/Keyboard_left.png";
-        image_list[4].src = "/static/images/Keyboard_right.png";
-        image_list[5].src = "/static/images/pause_key.png";
+        image_list[0].src = "/static/images/movement_left_settings.webp";
+        image_list[1].src = "/static/images/movement_right_settings.webp";
+        image_list[2].src = "/static/images/pause_screen_image.webp";
+        image_list[3].src = "/static/images/Keyboard_left.webp";
+        image_list[4].src = "/static/images/Keyboard_right.webp";
+        image_list[5].src = "/static/images/pause_key.webp";
 
         image_list[5].addEventListener("load" , () => {
             this.clear_screen()
